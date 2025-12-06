@@ -14,6 +14,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - `CLAUDE.md.template` with variable placeholders
   - `settings.json.template` for tool permissions
   - `claude-config.yml.template` for saving configurations
+- 5 pkgdown color schemes (Phase 2):
+  - academic-blue, forest-green, deep-purple, warm-orange, ocean-teal
+- Domain-specific command templates (Phase 2):
+  - fit-model, bootstrap-inference, sensitivity-analysis
+- Domain-specific agent templates (Phase 2):
+  - statistical-methods-expert, longitudinal-expert
 - `/setup-pkgdown` command for professional website design and standardization
 - pkgdown templates for statistical methods packages
 - Custom CSS templates with badge styling, responsive design, and accessibility features
