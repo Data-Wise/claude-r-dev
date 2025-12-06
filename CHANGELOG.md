@@ -8,6 +8,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+
+- `/project:init` command - Interactive configuration wizard (Phase 1)
+- Template system in `profiles/base/templates/`:
+  - `CLAUDE.md.template` with variable placeholders
+  - `settings.json.template` for tool permissions
+  - `claude-config.yml.template` for saving configurations
 - `/setup-pkgdown` command for professional website design and standardization
 - pkgdown templates for statistical methods packages
 - Custom CSS templates with badge styling, responsive design, and accessibility features
@@ -15,12 +21,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Comprehensive template documentation and usage guide
 
 ### Changed
+
 - Enhanced base profile with pkgdown design capabilities
 - Updated PROJECT_SUMMARY.md with new repository structure
 
 ## [1.0.0] - 2024-12-05
 
 ### Added
+
 - Initial release of claude-r-dev
 - Modular profile-based architecture
 - **base profile** with:
@@ -51,6 +59,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Modular command and agent system
 
 ### Features
+
 - **Slash Commands:**
   - `/fix-bug` - Test-driven debugging workflow
   - `/pre-commit-check` - Comprehensive quality checks (style, tests, coverage, R CMD check)
@@ -69,6 +78,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - VanderWeele notation (statistical-methods profile)
 
 ### Documentation
+
 - Comprehensive README with quick start
 - Detailed getting started guide
 - Installation and usage instructions
@@ -76,6 +86,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Troubleshooting section
 
 ### Installation
+
 - One-command installation via curl
 - Supports interactive and non-interactive modes
 - Validates R package structure
@@ -87,12 +98,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Release Notes
 
 ### v1.0.0 (Initial Release)
+
 This is the first public release of claude-r-dev, a modular Claude Code configuration system for R package development. It has been tested on:
+
 - mediationverse package (causal mediation analysis)
 - Multiple R package structures
 - macOS, Linux, and Windows (via WSL)
 
 **Key Achievement:** Transforms Claude Code into a specialized R package development assistant with:
+
 - Systematic workflows for common tasks
 - Expert code review capabilities
 - Comprehensive testing support
@@ -100,12 +114,14 @@ This is the first public release of claude-r-dev, a modular Claude Code configur
 - Statistical rigor enforcement (for methodology packages)
 
 **Community Impact:**
+
 - Reusable across R ecosystem
 - Open source contribution
 - Teaching tool for R package development
 - Lowers barrier to quality R package creation
 
 **Development Velocity Improvements:**
+
 - 50% faster feature development via systematic workflows
 - 75% reduction in bugs via test-first approach
 - Zero CRAN submission rejections via automated checks
@@ -125,9 +141,11 @@ This is the first public release of claude-r-dev, a modular Claude Code configur
 ## Future Roadmap
 
 ### v1.2.0 - Custom Configuration Generator (Planned - January 2025)
+
 **Theme:** Package-specific customization
 
 **Major Features:**
+
 - [ ] `/project:init` command - Interactive setup wizard
   - Package type selection (statistical-methods, data-analysis, visualization, shiny, etc.)
   - Domain-specific questions (e.g., "longitudinal models", "survival analysis")
@@ -144,6 +162,7 @@ This is the first public release of claude-r-dev, a modular Claude Code configur
 - [ ] Save and reuse configurations
 
 **Additional Features:**
+
 - [ ] More pkgdown color schemes (5+ templates)
 - [ ] Enhanced statistical-methods profile
 - [ ] Better error messages and validation
@@ -152,9 +171,11 @@ This is the first public release of claude-r-dev, a modular Claude Code configur
 **Goal:** Enable users to create mediationverse-style custom configurations for their own packages through guided workflow.
 
 ### v1.3.0 - Intelligent Package Analysis (Planned - Q1 2025)
+
 **Theme:** AI-powered setup
 
 **Major Features:**
+
 - [ ] `/project:analyze` command - Package structure analysis
   - Auto-detect package type from DESCRIPTION
   - Scan R/ files for patterns and object systems
@@ -167,14 +188,17 @@ This is the first public release of claude-r-dev, a modular Claude Code configur
 - [ ] Dependency analysis and special handling
 
 **Additional Features:**
+
 - [ ] More domain-specific profiles (longitudinal, survival, bayesian, spatial)
 - [ ] Profile mixing capabilities
 - [ ] Team configuration support
 
 ### v1.4.0 - Template Library & Marketplace (Planned - Q2 2025)
+
 **Theme:** Community configurations
 
 **Major Features:**
+
 - [ ] Profile marketplace/registry
 - [ ] Domain-specific profile library:
   - longitudinal models
@@ -188,6 +212,7 @@ This is the first public release of claude-r-dev, a modular Claude Code configur
 - [ ] One-click install popular configurations
 
 **Additional Features:**
+
 - [ ] data-analysis profile (tidyverse style)
 - [ ] shiny profile (Shiny app packages)
 - [ ] bioconductor profile (Bioconductor standards)
@@ -195,9 +220,11 @@ This is the first public release of claude-r-dev, a modular Claude Code configur
 - [ ] CI/CD templates for GitHub Actions
 
 ### v2.0.0 - Natural Language Setup & Advanced Features (Planned - Q3 2025)
+
 **Theme:** Next-generation customization
 
 **Major Features:**
+
 - [ ] Conversational configuration setup
 - [ ] Natural language command: "Set up for longitudinal mixed effects..."
 - [ ] AI-powered customization
@@ -209,6 +236,7 @@ This is the first public release of claude-r-dev, a modular Claude Code configur
 - [ ] Plugin system
 
 **Long-term Vision:**
+
 - Package-aware AI assistant that understands your domain
 - Learns from your coding patterns and preferences
 - Suggests improvements based on best practices
@@ -219,6 +247,7 @@ This is the first public release of claude-r-dev, a modular Claude Code configur
 ## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for details on:
+
 - How to report issues
 - How to suggest features
 - How to submit profiles
@@ -238,7 +267,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for details on:
 
 ## Links
 
-- **Repository:** https://github.com/username/claude-r-dev
-- **Documentation:** https://username.github.io/claude-r-dev/
-- **Issues:** https://github.com/username/claude-r-dev/issues
-- **Discussions:** https://github.com/username/claude-r-dev/discussions
+- **Repository:** <https://github.com/Data-Wise/claude-r-dev>
+- **Documentation:** <https://Data-Wise.github.io/claude-r-dev/>
+- **Issues:** <https://github.com/Data-Wise/claude-r-dev/issues>
+- **Discussions:** <https://github.com/Data-Wise/claude-r-dev/discussions>

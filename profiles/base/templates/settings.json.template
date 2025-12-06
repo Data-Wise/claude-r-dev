@@ -1,0 +1,34 @@
+{
+  "env": {},
+  "permissions": {
+    "allow": [
+      "Bash(R:*)",
+      "Bash(Rscript:*)",
+      "Bash(git:*)",
+      "Bash(gh:*)",
+      "Bash(devtools::*)",
+      "Bash(testthat::*)",
+      "Bash(covr::*)",
+      "Bash(styler::*)",
+      "Bash(lintr::*)",
+      "Bash(pkgdown::*)",
+      "Bash(quarto:*)"
+    ],
+    "deny": []
+  },
+  "context": {
+    "include": [
+      "R/**/*.R",
+      "tests/**/*.R",
+      "man/**/*.Rd",
+      "vignettes/**",
+      "DESCRIPTION",
+      "NAMESPACE",
+      "_pkgdown.yml"
+    ],
+    "exclude": [
+      ".Rproj.user/**",
+      "*.Rcheck/**"
+    ]
+  }
+}
