@@ -112,48 +112,139 @@ Or with specific requirements:
 
 ---
 
-## Statistical Methods Commands
+## Survival Analysis Commands
 
-*(Available in templates, activated via wizard)*
+### `/project:survival-analysis`
 
-### `/project:fit-model`
-
-Systematic workflow for fitting and validating statistical models.
+Complete survival/time-to-event analysis workflow.
 
 **Phases:**
 
-1. **Specification** - Define estimand and assumptions
-2. **Implementation** - Write fitting function
-3. **Inference** - Add standard errors and CIs
-4. **Diagnostics** - Model checking
-5. **Documentation** - Complete roxygen2 docs
+- Data assessment (Kaplan-Meier, risk tables)
+- Model specification (Cox, AFT, competing risks)
+- Diagnostics (residuals, concordance)
+- Reporting (hazard ratios, survival curves)
 
 ---
 
-### `/project:bootstrap-inference`
+### `/project:check-proportional-hazards`
 
-Implement bootstrap-based inference.
+Check and handle proportional hazards assumption violations.
 
-**Topics covered:**
+**Covers:**
 
-- Bootstrap type selection
-- Parallel implementation
-- CI methods (percentile, BCa, normal)
-- Coverage validation
-- Performance optimization
+- Schoenfeld residuals test
+- Log-log plots
+- Solutions (stratification, time-varying coefficients)
 
 ---
 
-### `/project:sensitivity-analysis`
+## Bayesian Commands
 
-Implement sensitivity analysis for unmeasured confounding.
+### `/project:bayesian-model`
+
+Systematic Bayesian model development workflow.
+
+**Phases:**
+
+- Prior specification
+- MCMC diagnostics (R-hat, ESS, divergences)
+- Posterior analysis
+- Model comparison (LOO-CV)
+
+---
+
+### `/project:prior-selection`
+
+Prior specification and sensitivity analysis.
+
+**Covers:**
+
+- Weakly informative priors
+- Prior predictive checks
+- Sensitivity to prior choices
+
+---
+
+## Causal Inference Commands
+
+### `/project:validate-dag`
+
+Validate causal diagrams for identification.
+
+**Covers:**
+
+- DAG specification (dagitty)
+- Adjustment set identification
+- Collider detection
+- D-separation testing
+
+---
+
+### `/project:propensity-score`
+
+Propensity score-based causal inference.
 
 **Methods:**
 
-- E-value calculation
-- Tipping point analysis
-- Sensitivity parameter contours
-- Interpretation guidance
+- Inverse probability weighting (IPW)
+- Matching
+- Stratification
+- Balance diagnostics
+
+---
+
+### `/project:doubly-robust`
+
+AIPW and TMLE doubly-robust estimation.
+
+**Features:**
+
+- Doubly-robust property explanation
+- AIPW implementation
+- TMLE implementation
+- Influence function standard errors
+
+---
+
+### `/project:instrumental-variable`
+
+Instrumental variable estimation.
+
+**Covers:**
+
+- IV requirements (relevance, exclusion, independence)
+- 2SLS implementation
+- Weak instrument diagnostics
+- LATE interpretation
+
+---
+
+## Mediation Analysis Commands
+
+### `/project:identify-mediation-effects`
+
+Check identification assumptions for causal mediation.
+
+**VanderWeele conditions:**
+
+- No unmeasured A-Y confounding
+- No unmeasured M-Y confounding
+- No unmeasured A-M confounding
+- No exposure-induced M-Y confounders
+
+---
+
+### `/project:multiple-mediators`
+
+Handle parallel and serial multiple mediator analysis.
+
+**Covers:**
+
+- Mediator structure (parallel vs serial)
+- Effect decomposition
+- Path-specific effects
+- Joint mediation
 
 ---
 
@@ -167,16 +258,7 @@ Expert code review for CRAN compliance and quality.
 
 ```
 "Use r-package-reviewer sub-agent to review R/my-function.R"
-"Use r-package-reviewer to check my latest changes"
 ```
-
-**Reviews:**
-
-- CRAN compliance (critical and important)
-- Documentation completeness
-- Test coverage
-- Code quality and style
-- Performance issues
 
 ---
 
@@ -188,24 +270,11 @@ Comprehensive test generation with edge cases.
 
 ```
 "Use test-specialist sub-agent to write tests for my_function()"
-"Use test-specialist to add edge case tests"
 ```
-
-**Generates tests for:**
-
-- Happy path
-- NA values
-- Zero-length inputs
-- Single elements
-- Invalid types
-- Boundary values
-- Large inputs
 
 ---
 
 ### `statistical-methods-expert`
-
-*(Statistical methods profile)*
 
 Reviews statistical correctness and methodology.
 
@@ -215,18 +284,9 @@ Reviews statistical correctness and methodology.
 "Use statistical-methods-expert to verify my estimator"
 ```
 
-**Reviews:**
-
-- Estimand definition
-- Identification assumptions
-- Inference validity
-- Numerical stability
-
 ---
 
 ### `longitudinal-expert`
-
-*(Statistical methods profile)*
 
 Specialist for mixed effects and repeated measures.
 
@@ -236,16 +296,59 @@ Specialist for mixed effects and repeated measures.
 "Use longitudinal-expert to review my mixed model"
 ```
 
-**Reviews:**
+---
 
-- Random effects structure
-- Correlation handling
-- Convergence issues
-- Missing data patterns
+### `survival-expert`
+
+Specialist for survival and time-to-event analysis.
+
+**Usage:**
+
+```
+"Use survival-expert to review my Cox model"
+```
+
+---
+
+### `bayesian-expert`
+
+Specialist for Bayesian inference and MCMC.
+
+**Usage:**
+
+```
+"Use bayesian-expert to check my posterior diagnostics"
+```
+
+---
+
+### `causal-inference-expert`
+
+Specialist for causal identification and estimation.
+
+**Usage:**
+
+```
+"Use causal-inference-expert to verify my DAG and adjustment set"
+```
+
+---
+
+### `mediation-expert`
+
+Specialist for causal mediation analysis.
+
+**Usage:**
+
+```
+"Use mediation-expert to check my NDE/NIE identification"
+```
 
 ---
 
 ## Quick Reference
+
+### Commands
 
 | Command | Purpose |
 |---------|---------|
@@ -256,10 +359,26 @@ Specialist for mixed effects and repeated measures.
 | `/project:fit-model` | Model fitting |
 | `/project:bootstrap-inference` | Bootstrap CIs |
 | `/project:sensitivity-analysis` | Sensitivity analysis |
+| `/project:survival-analysis` | Survival models |
+| `/project:check-proportional-hazards` | PH assumption |
+| `/project:bayesian-model` | Bayesian workflow |
+| `/project:prior-selection` | Prior specification |
+| `/project:validate-dag` | DAG validation |
+| `/project:propensity-score` | Propensity scores |
+| `/project:doubly-robust` | AIPW/TMLE |
+| `/project:instrumental-variable` | IV estimation |
+| `/project:identify-mediation-effects` | Mediation ID |
+| `/project:multiple-mediators` | Multiple mediators |
 
-| Agent | Purpose |
-|-------|---------|
+### Agents
+
+| Agent | Domain |
+|-------|--------|
 | `r-package-reviewer` | Code review |
 | `test-specialist` | Test generation |
-| `statistical-methods-expert` | Methodology review |
-| `longitudinal-expert` | Mixed models review |
+| `statistical-methods-expert` | Methodology |
+| `longitudinal-expert` | Mixed models |
+| `survival-expert` | Survival analysis |
+| `bayesian-expert` | Bayesian/MCMC |
+| `causal-inference-expert` | Causal inference |
+| `mediation-expert` | Mediation analysis |
