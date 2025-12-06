@@ -3,8 +3,8 @@
 > Supercharge your R package development with AI-powered workflows using Claude Code
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![GitHub release](https://img.shields.io/github/release/username/claude-r-dev.svg)](https://github.com/username/claude-r-dev/releases)
-[![Documentation](https://img.shields.io/badge/docs-latest-blue.svg)](https://github.com/username/claude-r-dev/tree/main/docs)
+[![GitHub release](https://img.shields.io/github/release/Data-Wise/claude-r-dev.svg)](https://github.com/Data-Wise/claude-r-dev/releases)
+[![Documentation](https://img.shields.io/badge/docs-latest-blue.svg)](https://github.com/Data-Wise/claude-r-dev/tree/main/docs)
 
 **claude-r-dev** is a comprehensive configuration system for [Claude Code](https://claude.ai/code) that transforms AI-assisted coding from helpful suggestions into systematic, production-ready R package development.
 
@@ -20,6 +20,7 @@
 ## 🚀 Quick Start
 
 ### Install Claude Code CLI
+
 ```bash
 npm install -g @anthropic-ai/claude-code
 ```
@@ -27,28 +28,32 @@ npm install -g @anthropic-ai/claude-code
 ### Install claude-r-dev to Your Package
 
 **Option 1: One-liner (recommended)**
+
 ```bash
-curl -fsSL https://raw.githubusercontent.com/username/claude-r-dev/main/scripts/install.sh | bash -s -- \
+curl -fsSL https://raw.githubusercontent.com/Data-Wise/claude-r-dev/main/scripts/install.sh | bash -s -- \
   --profile base \
   --target /path/to/your/package
 ```
 
 **Option 2: With multiple profiles**
+
 ```bash
 # For statistical methodology packages
-bash <(curl -fsSL https://raw.githubusercontent.com/username/claude-r-dev/main/scripts/install.sh) \
+bash <(curl -fsSL https://raw.githubusercontent.com/Data-Wise/claude-r-dev/main/scripts/install.sh) \
   --profiles base,statistical-methods \
   --target ~/projects/mypackage
 ```
 
 **Option 3: Clone and customize**
+
 ```bash
-git clone https://github.com/username/claude-r-dev.git
+git clone https://github.com/Data-Wise/claude-r-dev.git
 cd claude-r-dev
 ./scripts/install.sh --profiles base,statistical-methods --target ~/mypackage
 ```
 
 ### Start Using
+
 ```bash
 cd /path/to/your/package
 claude
@@ -71,6 +76,7 @@ claude
 ```
 
 The wizard will ask about:
+
 - Package type and domain
 - Statistical notation preferences
 - Object system (S3, S4, S7, R6)
@@ -86,7 +92,9 @@ The wizard will ask about:
 ## 📦 Available Profiles
 
 ### 🔧 base (Required)
+
 **Essential R package development standards**
+
 - CRAN compliance automation
 - Testing standards (testthat3, >80% coverage)
 - Code style enforcement (tidyverse)
@@ -94,13 +102,16 @@ The wizard will ask about:
 - Documentation standards (roxygen2, pkgdown)
 
 **Includes:**
+
 - `/project:fix-bug` - Structured debugging workflow
 - `/project:pre-commit-check` - Comprehensive quality checks
 - `r-package-reviewer` sub-agent - Expert code review
 - `test-specialist` sub-agent - Comprehensive test generation
 
 ### 📊 statistical-methods
+
 **For methodology and causal inference packages**
+
 - Statistical notation standards (VanderWeele, Pearl, Hernán & Robins)
 - Identification assumptions documentation
 - Sensitivity analysis patterns
@@ -108,23 +119,28 @@ The wizard will ask about:
 - S7 object system guidelines
 
 **Includes:**
+
 - `/project:add-method` - Systematic new method development
 - `/project:migrate-s7` - Safe S3/S4 to S7 migration
 - Enhanced `r-package-reviewer` with statistical correctness checks
 - Methods-specific testing patterns
 
 ### 📈 data-analysis *(Coming in v1.1)*
+
 For packages focused on data analysis and visualization
 
 ### 🌐 shiny *(Coming in v1.1)*
+
 For Shiny application packages
 
 ### 🧬 bioconductor *(Coming in v1.1)*
+
 For Bioconductor package development
 
 ## 💡 Usage Examples
 
 ### Basic Package Development
+
 ```bash
 # Install base profile
 ./scripts/install.sh --profile base --target ~/mypackage
@@ -140,6 +156,7 @@ claude
 ```
 
 ### Statistical Methods Package
+
 ```bash
 # Install base + statistical-methods
 ./scripts/install.sh --profiles base,statistical-methods --target ~/causalmethod
@@ -160,6 +177,7 @@ claude
 ```
 
 ### Test-Driven Development
+
 ```
 "Use test-specialist to write comprehensive tests for my_function()"
 # Generates tests for happy path, edge cases, validation
@@ -174,20 +192,26 @@ claude
 ## 🎯 Key Features
 
 ### Custom Slash Commands
+
 Execute complex workflows with simple commands:
+
 - `/project:add-method` - Add new statistical/analytical methods
 - `/project:fix-bug` - Test-first debugging workflow
 - `/project:migrate-s7` - S3/S4 to S7 class migration
 - `/project:pre-commit-check` - Full quality assurance suite
 
 ### Specialized Sub-Agents
+
 Expert AI assistants that maintain focused context:
+
 - **r-package-reviewer**: Reviews for statistical correctness, CRAN compliance, code quality
 - **test-specialist**: Writes comprehensive test suites with edge cases
 - **documentation-writer**: Creates roxygen2 docs, vignettes, pkgdown sites
 
 ### Automated Quality Checks
+
 Built-in automation for:
+
 - ✅ Style checking (`styler`, `lintr`)
 - ✅ Test coverage (`covr`, >80% required)
 - ✅ R CMD check (CRAN compliance)
@@ -196,7 +220,9 @@ Built-in automation for:
 - ✅ Git commit message standards
 
 ### Statistical Rigor
+
 For methodology packages:
+
 - Standard notation (VanderWeele 2015, Pearl 2009)
 - Identification assumptions documentation
 - Inference method requirements (bootstrap, delta method)
@@ -206,14 +232,15 @@ For methodology packages:
 ## 📚 Documentation
 
 - **[Getting Started](docs/getting-started.md)** - Installation and first steps
-- **[Profiles Guide](docs/profiles.md)** - Detailed profile descriptions
-- **[Customization](docs/customization.md)** - Extending and adapting configurations
-- **[Contributing](docs/contributing.md)** - Adding profiles and improvements
+- **[Implementation Plan](IMPLEMENTATION_PLAN.md)** - Detailed development roadmap
+- **[Roadmap](ROADMAP.md)** - Future features and timeline
+- **[Changelog](CHANGELOG.md)** - Version history
 - **[Examples](examples/)** - Real-world usage examples
 
 ## 🏗️ Architecture
 
 ### Profile System
+
 ```
 base/                   # Core R package standards (required)
 ├── CLAUDE.md          # Main configuration
@@ -228,6 +255,7 @@ statistical-methods/    # Extends base for methodology
 ```
 
 ### Installation Process
+
 1. Validates target is R package (checks for DESCRIPTION)
 2. Backs up existing configuration
 3. Installs base profile
@@ -238,11 +266,13 @@ statistical-methods/    # Extends base for methodology
 ## 🔧 Requirements
 
 ### Essential
+
 - **Claude Code CLI**: `npm install -g @anthropic-ai/claude-code`
 - **R** (≥ 4.0.0): With development tools
 - **Git**: For version control
 
 ### R Packages (installed automatically on first use)
+
 ```r
 install.packages(c(
   "devtools", "testthat", "roxygen2",
@@ -252,6 +282,7 @@ install.packages(c(
 ```
 
 For statistical-methods profile:
+
 ```r
 install.packages("S7")  # Modern object system
 ```
@@ -268,32 +299,23 @@ We welcome contributions! Ways to help:
 - **Report issues**: Help us identify problems
 - **Share feedback**: Tell us what works and what doesn't
 
-See [CONTRIBUTING.md](docs/contributing.md) for details.
+See [CONTRIBUTING.md](CONTRIBUTING.md) for details.
 
 ## 📊 Real-World Examples
 
 ### mediationverse
+
 Statistical methods package for causal mediation analysis using claude-r-dev:
+
 - **Profiles**: `base` + `statistical-methods`
 - **Result**: 50% faster feature development, 100% test coverage
-- **See**: [examples/mediationverse/](examples/mediationverse/)
 
 ### [Your Package Here]
+
 Successfully using claude-r-dev? Submit a PR to share your story!
 
 ## 🎓 Learning Resources
 
-### Tutorials
-- [Your First claude-r-dev Package](docs/tutorials/first-package.md)
-- [Adding Statistical Methods](docs/tutorials/statistical-methods.md)
-- [Test-Driven Development Workflow](docs/tutorials/tdd-workflow.md)
-
-### Reference
-- [All Slash Commands](docs/reference/commands.md)
-- [Sub-Agent Catalog](docs/reference/agents.md)
-- [Configuration Options](docs/reference/configuration.md)
-
-### External
 - [Claude Code Documentation](https://claude.ai/code)
 - [Claude Code Best Practices](https://www.anthropic.com/engineering/claude-code-best-practices)
 - [R Packages Book](https://r-pkgs.org/)
@@ -302,12 +324,14 @@ Successfully using claude-r-dev? Submit a PR to share your story!
 ## 🗺️ Roadmap
 
 ### v1.0 (Current)
+
 - ✅ Base profile with core R package development
 - ✅ Statistical-methods profile for methodology packages
 - ✅ Smart installer with profile merging
 - ✅ Comprehensive documentation
 
 ### v1.1 (Next)
+
 - ⬜ Data-analysis profile
 - ⬜ Shiny profile
 - ⬜ Bioconductor profile
@@ -315,6 +339,7 @@ Successfully using claude-r-dev? Submit a PR to share your story!
 - ⬜ Community profile registry
 
 ### v1.2 (Future)
+
 - ⬜ Web-based profile builder
 - ⬜ VS Code extension integration
 - ⬜ GitHub Actions workflow templates
@@ -353,9 +378,8 @@ MIT License - see [LICENSE](LICENSE) for details.
 
 ## 📬 Contact & Support
 
-- **Issues**: [GitHub Issues](https://github.com/username/claude-r-dev/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/username/claude-r-dev/discussions)
-- **Twitter**: [@your_handle](https://twitter.com/your_handle)
+- **Issues**: [GitHub Issues](https://github.com/Data-Wise/claude-r-dev/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/Data-Wise/claude-r-dev/discussions)
 
 ---
 
