@@ -64,9 +64,9 @@ claude
 /project:pre-commit-check # Run comprehensive quality checks
 ```
 
-## 🎨 Create Your Custom Configuration *(Coming in v1.2.0)*
+## 🎨 Create Your Custom Configuration
 
-**New in January 2025:** Interactive wizard to generate package-specific configurations!
+**NEW:** Interactive wizard to generate package-specific configurations!
 
 ```bash
 cd your-package
@@ -75,7 +75,7 @@ claude
 /project:init
 ```
 
-The wizard will ask about:
+The wizard asks about:
 
 - Package type and domain
 - Statistical notation preferences
@@ -83,11 +83,11 @@ The wizard will ask about:
 - Function organization
 - Inference methods
 - Testing requirements
-- Website design
+- Website design (5 color schemes!)
 
-...and generate a custom configuration tailored to YOUR package, just like the mediationverse setup!
+...and generates a custom configuration tailored to YOUR package!
 
-[Learn more about customization →](IMPLEMENTATION_PLAN.md)
+[Learn more about customization →](docs/customization-guide.md)
 
 ## 📦 Available Profiles
 
@@ -125,17 +125,19 @@ The wizard will ask about:
 - Enhanced `r-package-reviewer` with statistical correctness checks
 - Methods-specific testing patterns
 
-### 📈 data-analysis *(Coming in v1.1)*
+### 📈 data-analysis *(Coming in v1.4)*
 
 For packages focused on data analysis and visualization
 
-### 🌐 shiny *(Coming in v1.1)*
+### 🌐 shiny *(Coming in v1.4)*
 
 For Shiny application packages
 
-### 🧬 bioconductor *(Coming in v1.1)*
+### 🧬 bioconductor *(Coming in v1.4)*
 
 For Bioconductor package development
+
+[See all profiles →](docs/profiles.md)
 
 ## 💡 Usage Examples
 
@@ -232,10 +234,12 @@ For methodology packages:
 ## 📚 Documentation
 
 - **[Getting Started](docs/getting-started.md)** - Installation and first steps
-- **[Implementation Plan](IMPLEMENTATION_PLAN.md)** - Detailed development roadmap
-- **[Roadmap](ROADMAP.md)** - Future features and timeline
+- **[Profiles Guide](docs/profiles.md)** - Available profiles and features
+- **[Customization](docs/customization-guide.md)** - Wizard and manual customization
+- **[Commands Reference](docs/commands-reference.md)** - All commands and agents
+- **[Config Schema](docs/config-schema.md)** - Configuration file reference
+- **[Examples](examples/)** - Example configurations
 - **[Changelog](CHANGELOG.md)** - Version history
-- **[Examples](examples/)** - Real-world usage examples
 
 ## 🏗️ Architecture
 
