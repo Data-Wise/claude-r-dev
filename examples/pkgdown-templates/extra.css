@@ -1,0 +1,362 @@
+/* Custom pkgdown CSS for Statistical Methods Packages */
+/* Place this file in: pkgdown/extra.css */
+
+/* ============================================
+   SIDEBAR BADGES
+   ============================================ */
+
+/* Container for badges in sidebar */
+.sidebar .badges {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  text-align: center;
+  padding: 15px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+}
+
+/* Individual badge styling */
+.sidebar .badges img {
+  display: block;
+  margin: 10px auto;
+  max-width: 100%;
+  height: auto;
+  transition: transform 0.2s ease;
+}
+
+/* Badge hover effect */
+.sidebar .badges img:hover {
+  transform: scale(1.05);
+}
+
+/* Badge links */
+.sidebar .badges a {
+  display: block;
+  margin: 8px 0;
+}
+
+
+/* ============================================
+   NAVIGATION
+   ============================================ */
+
+/* Navbar styling */
+.navbar {
+  background-color: #1F4788 !important;
+  border-bottom: 3px solid #56B4E9;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+  color: #ffffff !important;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  transition: background-color 0.2s ease;
+}
+
+.navbar-dark .navbar-nav .nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+.navbar-dark .navbar-nav .active > .nav-link {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+}
+
+
+/* ============================================
+   SIDEBAR
+   ============================================ */
+
+/* Sidebar container */
+.sidebar {
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+/* Sidebar headings */
+.sidebar h2 {
+  color: #1F4788;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  border-bottom: 2px solid #56B4E9;
+  padding-bottom: 5px;
+}
+
+/* Sidebar links */
+.sidebar a {
+  color: #1F4788;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.sidebar a:hover {
+  color: #56B4E9;
+  text-decoration: underline;
+}
+
+
+/* ============================================
+   REFERENCE INDEX
+   ============================================ */
+
+/* Reference section headings */
+.ref-index h2 {
+  color: #1F4788;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-top: 30px;
+  margin-bottom: 15px;
+  border-left: 4px solid #56B4E9;
+  padding-left: 15px;
+}
+
+/* Reference descriptions */
+.ref-index .section-desc {
+  color: #6c757d;
+  font-size: 0.95rem;
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+
+/* Function list */
+.ref-index ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.ref-index li {
+  margin-bottom: 10px;
+  padding: 8px 12px;
+  background-color: #f8f9fa;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+
+.ref-index li:hover {
+  background-color: #e9ecef;
+}
+
+
+/* ============================================
+   CODE BLOCKS
+   ============================================ */
+
+/* Inline code */
+code {
+  background-color: #f8f9fa;
+  color: #d63384;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-size: 0.9em;
+}
+
+/* Code blocks */
+pre {
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 6px;
+  padding: 15px;
+  overflow-x: auto;
+}
+
+pre code {
+  background-color: transparent;
+  color: inherit;
+  padding: 0;
+}
+
+
+/* ============================================
+   TABLES
+   ============================================ */
+
+/* Table styling */
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 20px 0;
+}
+
+th {
+  background-color: #1F4788;
+  color: #ffffff;
+  padding: 12px;
+  text-align: left;
+  font-weight: 600;
+}
+
+td {
+  padding: 10px 12px;
+  border-bottom: 1px solid #dee2e6;
+}
+
+tr:hover {
+  background-color: #f8f9fa;
+}
+
+
+/* ============================================
+   BUTTONS AND LINKS
+   ============================================ */
+
+/* Primary buttons */
+.btn-primary {
+  background-color: #1F4788;
+  border-color: #1F4788;
+  color: #ffffff;
+  transition: all 0.2s ease;
+}
+
+.btn-primary:hover {
+  background-color: #163660;
+  border-color: #163660;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* Secondary buttons */
+.btn-secondary {
+  background-color: #56B4E9;
+  border-color: #56B4E9;
+  color: #ffffff;
+}
+
+.btn-secondary:hover {
+  background-color: #3a9fd6;
+  border-color: #3a9fd6;
+}
+
+
+/* ============================================
+   ALERTS AND CALLOUTS
+   ============================================ */
+
+/* Info callouts */
+.alert-info {
+  background-color: #d1ecf1;
+  border-color: #56B4E9;
+  color: #0c5460;
+}
+
+/* Warning callouts */
+.alert-warning {
+  background-color: #fff3cd;
+  border-color: #F0E442;
+  color: #856404;
+}
+
+/* Success callouts */
+.alert-success {
+  background-color: #d4edda;
+  border-color: #009E73;
+  color: #155724;
+}
+
+
+/* ============================================
+   FOOTER
+   ============================================ */
+
+footer {
+  background-color: #1F4788;
+  color: #ffffff;
+  padding: 30px 0;
+  margin-top: 50px;
+}
+
+footer a {
+  color: #56B4E9;
+  text-decoration: none;
+}
+
+footer a:hover {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+
+/* Mobile devices */
+@media (max-width: 768px) {
+  .sidebar .badges img {
+    max-width: 80%;
+  }
+  
+  .navbar-dark .navbar-nav .nav-link {
+    padding: 0.5rem 0.5rem;
+  }
+  
+  .ref-index h2 {
+    font-size: 1.3rem;
+  }
+  
+  th, td {
+    padding: 8px;
+    font-size: 0.9rem;
+  }
+}
+
+/* Tablet devices */
+@media (max-width: 992px) {
+  .sidebar {
+    margin-top: 20px;
+  }
+}
+
+
+/* ============================================
+   PRINT STYLES
+   ============================================ */
+
+@media print {
+  .navbar,
+  .sidebar .badges,
+  footer {
+    display: none;
+  }
+  
+  a {
+    color: #000000;
+    text-decoration: none;
+  }
+  
+  pre {
+    border: 1px solid #000000;
+  }
+}
+
+
+/* ============================================
+   ACCESSIBILITY
+   ============================================ */
+
+/* Focus indicators */
+a:focus,
+button:focus {
+  outline: 2px solid #56B4E9;
+  outline-offset: 2px;
+}
+
+/* Skip to main content link */
+.skip-to-main {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: #1F4788;
+  color: white;
+  padding: 8px;
+  text-decoration: none;
+  z-index: 100;
+}
+
+.skip-to-main:focus {
+  top: 0;
+}

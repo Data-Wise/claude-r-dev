@@ -1,0 +1,177 @@
+# Statistical Methods Package pkgdown Template
+
+# This template is designed for statistical methodology packages
+# Features: Professional academic design, clear method organization, badges in sidebar
+
+url: https://username.github.io/packagename/
+
+# Development mode: Automatically handle stable vs development versions
+# - Release versions (3 components, e.g., 1.0.0): Build to docs/
+# - Dev versions (4 components, e.g., 1.0.0.9000): Build to docs/dev/
+# After releasing, immediately bump version to X.X.X.9000 in DESCRIPTION
+development:
+  mode: auto
+
+template:
+  bootstrap: 5
+  theme: flatly
+  bslib:
+    primary: "#1F4788"      # Dark blue for headers
+    secondary: "#56B4E9"    # Light blue for accents
+    success: "#009E73"      # Green for success states
+    info: "#0072B2"         # Blue for info
+    warning: "#F0E442"      # Yellow for warnings
+    danger: "#D55E00"       # Red for errors
+    bg: "#F8F9FA"          # Light gray background
+    fg: "#212529"          # Dark text
+  includes:
+    in_header: |
+      <link rel="stylesheet" href="extra.css">
+
+home:
+  title: "Package Name: Statistical Methods for [Topic]"
+  description: |
+    Brief description of what your package does. Focus on the statistical
+    methods and applications.
+  
+  sidebar:
+    structure: [badges, links, license, community, citation, authors, dev]
+    components:
+      badges:
+        - text: |
+            [![R-CMD-check](https://github.com/username/packagename/workflows/R-CMD-check/badge.svg)](https://github.com/username/packagename/actions)
+            [![Codecov](https://codecov.io/gh/username/packagename/branch/main/graph/badge.svg)](https://codecov.io/gh/username/packagename)
+            [![CRAN status](https://www.r-pkg.org/badges/version/packagename)](https://CRAN.R-project.org/package=packagename)
+            [![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
+
+navbar:
+  structure:
+    left:  [home, reference, articles, news]
+    right: [search, github]
+  components:
+    home:
+      icon: fas fa-home fa-lg
+      href: index.html
+    reference:
+      text: Reference
+      href: reference/index.html
+    articles:
+      text: Articles
+      menu:
+      - text: Getting Started
+        href: articles/getting-started.html
+      - text: -------
+      - text: "Methodology"
+      - text: Statistical Theory
+        href: articles/theory.html
+      - text: Estimation Methods
+        href: articles/estimation.html
+      - text: Inference Procedures
+        href: articles/inference.html
+      - text: -------
+      - text: "Advanced Topics"
+      - text: Sensitivity Analysis
+        href: articles/sensitivity.html
+      - text: Multiple Comparisons
+        href: articles/multiple-comparisons.html
+    news:
+      text: Changelog
+      href: news/index.html
+    github:
+      icon: fab fa-github fa-lg
+      href: https://github.com/username/packagename/
+
+reference:
+  - title: Main Estimation Functions
+    desc: >
+      Core functions for estimating statistical quantities of interest.
+      These are the primary user-facing functions.
+    contents:
+    - estimate_effect
+    - compute_estimand
+  
+  - title: Inference Methods
+    desc: >
+      Functions for statistical inference including confidence intervals,
+      hypothesis tests, and standard errors.
+    contents:
+    - bootstrap_ci
+    - delta_method_ci
+    - influence_function_ci
+    - wald_test
+  
+  - title: Sensitivity Analysis
+    desc: >
+      Tools for assessing robustness of estimates to violations of assumptions.
+    contents:
+    - sensitivity_analysis
+    - evalue
+    - tipping_point
+    - sensitivity_plot
+  
+  - title: Model Fitting
+    desc: >
+      Functions for fitting statistical models and nuisance parameter estimation.
+    contents:
+    - fit_model
+    - estimate_propensity
+    - estimate_outcome
+  
+  - title: Utilities
+    desc: >
+      Helper functions for data manipulation, validation, and conversion.
+    contents:
+    - starts_with("validate_")
+    - starts_with("convert_")
+    - starts_with("check_")
+  
+  - title: Visualization
+    desc: >
+      Plotting and summary functions for results visualization.
+    contents:
+    - plot.effect_estimate
+    - summary.effect_estimate
+    - forest_plot
+  
+  - title: Data
+    desc: >
+      Example datasets for demonstrations and testing.
+    contents:
+    - example_data
+    - simulation_data
+
+articles:
+  - title: Getting Started
+    navbar: ~
+    contents:
+    - getting-started
+  
+  - title: Methodology
+    desc: Statistical theory and methods
+    contents:
+    - theory
+    - estimation
+    - inference
+  
+  - title: Advanced Topics
+    desc: Advanced statistical techniques
+    contents:
+    - sensitivity
+    - multiple-comparisons
+    - advanced-usage
+
+footer:
+  structure:
+    left: developed_by
+    right: built_with
+  components:
+    developed_by: "Developed by [Your Name]"
+
+authors:
+  Your Name:
+    href: https://yourwebsite.com
+
+development:
+  mode: auto
+  version_label: default
+  version_tooltip: "Version"
