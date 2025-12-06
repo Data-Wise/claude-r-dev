@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>claude-r-dev | AI-Powered R Package Development</title>
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --primary-dark: #4338ca;
+            --bg: #0f172a;
+            --surface: #1e293b;
+            --text: #f1f5f9;
+            --muted: #94a3b8;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+        .container { max-width: 1000px; margin: 0 auto; padding: 2rem; }
+        header {
+            text-align: center;
+            padding: 4rem 0;
+            background: linear-gradient(135deg, var(--surface) 0%, var(--bg) 100%);
+            border-bottom: 1px solid #334155;
+        }
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, #818cf8, #c084fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .tagline {
+            font-size: 1.25rem;
+            color: var(--muted);
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+        .buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+        .btn-primary:hover { background: var(--primary-dark); }
+        .btn-secondary {
+            border: 2px solid #475569;
+            color: var(--text);
+        }
+        .btn-secondary:hover { border-color: var(--primary); }
+        main { padding: 3rem 0; }
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        .feature {
+            background: var(--surface);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid #334155;
+        }
+        .feature h3 {
+            color: #818cf8;
+            margin-bottom: 0.5rem;
+        }
+        .feature p { color: var(--muted); font-size: 0.95rem; }
+        section { margin: 3rem 0; }
+        section h2 {
+            font-size: 1.75rem;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid #334155;
+            padding-bottom: 0.5rem;
+        }
+        .doc-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+        .doc-link {
+            display: block;
+            padding: 1rem;
+            background: var(--surface);
+            border-radius: 8px;
+            text-decoration: none;
+            color: var(--text);
+            border: 1px solid #334155;
+            transition: all 0.2s;
+        }
+        .doc-link:hover {
+            border-color: var(--primary);
+            transform: translateY(-2px);
+        }
+        .doc-link small { color: var(--muted); display: block; margin-top: 0.25rem; }
+        code {
+            background: var(--surface);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-family: 'SF Mono', Consolas, monospace;
+        }
+        pre {
+            background: var(--surface);
+            padding: 1rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            border: 1px solid #334155;
+        }
+        footer {
+            text-align: center;
+            padding: 2rem;
+            border-top: 1px solid #334155;
+            color: var(--muted);
+        }
+        footer a { color: #818cf8; }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>claude-r-dev</h1>
+            <p class="tagline">Supercharge your R package development with AI-powered workflows using Claude Code</p>
+            <div class="buttons">
+                <a href="https://github.com/Data-Wise/claude-r-dev" class="btn btn-primary">View on GitHub</a>
+                <a href="getting-started.html" class="btn btn-secondary">Get Started</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <section>
+            <h2>✨ Features</h2>
+            <div class="features">
+                <div class="feature">
+                    <h3>🔧 Configuration Wizard</h3>
+                    <p>Interactive <code>/project:init</code> command generates custom configurations for your package type.</p>
+                </div>
+                <div class="feature">
+                    <h3>📊 17 Domain Commands</h3>
+                    <p>Statistical, survival, Bayesian, causal inference, and mediation analysis workflows.</p>
+                </div>
+                <div class="feature">
+                    <h3>🤖 8 Expert Agents</h3>
+                    <p>Specialized AI assistants for code review, testing, and domain-specific methodology.</p>
+                </div>
+                <div class="feature">
+                    <h3>⚡ Quality Automation</h3>
+                    <p>Built-in CRAN compliance, test coverage, and code style enforcement.</p>
+                </div>
+                <div class="feature">
+                    <h3>🎨 pkgdown Themes</h3>
+                    <p>5 professional color schemes for your package website.</p>
+                </div>
+                <div class="feature">
+                    <h3>📦 One-Line Install</h3>
+                    <p>Install directly from GitHub to any R package.</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>🚀 Quick Start</h2>
+            <pre><code># Install to your R package
+curl -fsSL https://raw.githubusercontent.com/Data-Wise/claude-r-dev/main/scripts/install.sh | bash -s -- \
+  --profile base \
+  --target /path/to/your/package
+
+# Then in Claude Code:
+cd /path/to/your/package
+claude
+/project:init</code></pre>
+        </section>
+
+        <section>
+            <h2>📚 Documentation</h2>
+            <div class="doc-links">
+                <a href="getting-started.html" class="doc-link">
+                    Getting Started
+                    <small>Installation and first steps</small>
+                </a>
+                <a href="profiles.html" class="doc-link">
+                    Profiles Guide
+                    <small>Available configurations</small>
+                </a>
+                <a href="customization-guide.html" class="doc-link">
+                    Customization
+                    <small>Wizard and manual setup</small>
+                </a>
+                <a href="commands-reference.html" class="doc-link">
+                    Commands Reference
+                    <small>All commands and agents</small>
+                </a>
+                <a href="config-schema.html" class="doc-link">
+                    Config Schema
+                    <small>Configuration file format</small>
+                </a>
+            </div>
+        </section>
+
+        <section>
+            <h2>🎯 Domain Coverage</h2>
+            <div class="features">
+                <div class="feature">
+                    <h3>Statistical Methods</h3>
+                    <p>fit-model, bootstrap-inference, sensitivity-analysis</p>
+                </div>
+                <div class="feature">
+                    <h3>Survival Analysis</h3>
+                    <p>survival-analysis, check-proportional-hazards</p>
+                </div>
+                <div class="feature">
+                    <h3>Bayesian Inference</h3>
+                    <p>bayesian-model, prior-selection</p>
+                </div>
+                <div class="feature">
+                    <h3>Causal Inference</h3>
+                    <p>validate-dag, propensity-score, doubly-robust, instrumental-variable</p>
+                </div>
+                <div class="feature">
+                    <h3>Mediation Analysis</h3>
+                    <p>identify-mediation-effects, multiple-mediators</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2024 <a href="https://github.com/Data-Wise">Data-Wise</a> | MIT License | <a href="https://github.com/Data-Wise/claude-r-dev">GitHub</a></p>
+    </footer>
+</body>
+</html>
