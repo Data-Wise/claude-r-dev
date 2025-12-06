@@ -29,7 +29,7 @@
 
 ### v1.2.0 (December 2024)
 
-**Theme:** Custom Configuration Generator
+**Theme:** Custom Configuration Generator + MkDocs Documentation
 
 - ✅ `/project:init` - Interactive setup wizard
 - ✅ Configuration file support (`.claude-config.yml`)
@@ -37,6 +37,8 @@
 - ✅ 17 domain-specific command templates
 - ✅ 8 expert sub-agents
 - ✅ Comprehensive documentation
+- ✅ MkDocs with Material theme (dark/light mode)
+- ✅ GitHub Pages deployment via MkDocs
 
 **Domain Templates:**
 
@@ -155,7 +157,7 @@
 |---------|-------|--------|--------|
 | v1.0.0 | Foundation | Dec 2024 | ✅ Released |
 | v1.1.0 | Professional Design | Dec 2024 | ✅ Released |
-| v1.2.0 | Custom Generator | Jan 2025 | 🚧 Planning |
+| v1.2.0 | Custom Generator + MkDocs | Dec 2024 | ✅ Released |
 | v1.3.0 | AI Analysis | Q1 2025 | 📋 Planned |
 | v1.4.0 | Template Library | Q2 2025 | 📋 Planned |
 | v2.0.0 | Next-Gen | Q3 2025 | 💡 Vision |
@@ -220,10 +222,10 @@
 
 ## 🔗 Stay Updated
 
-- **GitHub:** [username/claude-r-dev](https://github.com/username/claude-r-dev)
-- **Releases:** [GitHub Releases](https://github.com/username/claude-r-dev/releases)
-- **Discussions:** [GitHub Discussions](https://github.com/username/claude-r-dev/discussions)
-- **Issues:** [GitHub Issues](https://github.com/username/claude-r-dev/issues)
+- **GitHub:** [Data-Wise/claude-r-dev](https://github.com/Data-Wise/claude-r-dev)
+- **Releases:** [GitHub Releases](https://github.com/Data-Wise/claude-r-dev/releases)
+- **Discussions:** [GitHub Discussions](https://github.com/Data-Wise/claude-r-dev/discussions)
+- **Issues:** [GitHub Issues](https://github.com/Data-Wise/claude-r-dev/issues)
 
 ---
 
@@ -236,12 +238,12 @@
 **Next releases:**
 
 - ✅ v1.1.0 - December 5, 2024 (Released)
-- 🎯 v1.2.0 - January 15, 2025 (Target)
-- 📅 v1.3.0 - March 2025
-- 📅 v1.4.0 - June 2025
+- ✅ v1.2.0 - December 6, 2024 (Released)
+- 📅 v1.3.0 - Q1 2025
+- 📅 v1.4.0 - Q2 2025
 
 ---
 
 **This roadmap is a living document and will evolve based on community feedback and developer needs.**
 
-**Questions or suggestions?** [Open a discussion →](https://github.com/username/claude-r-dev/discussions)
+**Questions or suggestions?** [Open a discussion →](https://github.com/Data-Wise/claude-r-dev/discussions)

@@ -88,6 +88,7 @@ nav:
   - Profiles: profiles.md
   - Configuration: config-schema.md
   - Customization: customization-guide.md
+  - Contributing: contributing.md
   - Tutorials:
     - Overview: tutorials/index.md
     - R Package Development: tutorials/r-package.md

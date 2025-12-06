@@ -6,9 +6,9 @@ A production-ready GitHub repository implementing a **modular, profile-based Cla
 
 **Current Version:** v1.2.0 with custom configuration generator  
 **GitHub:** <https://github.com/Data-Wise/claude-r-dev>  
-**GitHub Pages:** <https://data-wise.github.io/claude-r-dev/>
+**Documentation (MkDocs):** <https://data-wise.github.io/claude-r-dev/>
 
-This is live on GitHub with comprehensive domain templates for statistical, causal, survival, Bayesian, and mediation analysis packages.
+This is live on GitHub with comprehensive domain templates for statistical, causal, survival, Bayesian, and mediation analysis packages. Documentation is now powered by MkDocs with Material theme.
 
 ## 📦 Repository Structure
 
@@ -19,13 +19,30 @@ claude-r-dev/
 ├── CHANGELOG.md                        # Version history
 ├── ROADMAP.md                          # Future plans
 ├── IMPLEMENTATION_PLAN.md              # v1.2.0 implementation details
+├── CONTRIBUTING.md                     # Contribution guidelines
+├── MKDOCS_TUTORIAL.md                  # MkDocs usage guide
+├── mkdocs.yml                          # MkDocs configuration
 │
-├── docs/
-│   ├── getting-started.md             # Comprehensive user guide
+├── docs_mkdocs/                        # MkDocs documentation source
+│   ├── index.md                       # Homepage
+│   ├── getting-started.md             # User guide
 │   ├── profiles.md                    # Profile descriptions
 │   ├── customization-guide.md         # Wizard and customization
 │   ├── commands-reference.md          # All commands and agents
-│   └── config-schema.md               # Configuration file schema
+│   ├── config-schema.md               # Configuration file schema
+│   ├── contributing.md                # How to contribute
+│   └── tutorials/                     # Step-by-step tutorials
+│       ├── index.md
+│       ├── r-package.md
+│       ├── mediation.md
+│       ├── causal.md
+│       └── survival.md
+│
+├── docs/                               # Legacy HTML docs (deprecated)
+│   └── ...
+│
+├── .github/workflows/
+│   └── mkdocs.yml                     # GitHub Actions for MkDocs deployment
 │
 ├── profiles/
 │   └── base/
@@ -156,11 +173,14 @@ gh release create v1.0.0 \
 - [ ] Finish statistical-methods profile commands
 - [ ] Add mediationverse example
 - [ ] Add basic-package example
-- [ ] Create CONTRIBUTING.md
+- [x] Create CONTRIBUTING.md
 - [ ] Add GitHub issue templates
 - [ ] Add GitHub workflow for testing
 - [ ] Create demo video/GIF
-- [ ] Set up GitHub Pages for docs
+- [x] Set up MkDocs for docs (Material theme, dark/light mode)
+- [x] Deploy documentation to GitHub Pages
+- [x] Add contributing page to MkDocs
+- [x] Update all planning documents
 
 ## 🎯 Installation URLs (After GitHub Push)
 
@@ -427,7 +447,7 @@ Supercharge your R package development with AI-powered workflows.
 ✅ CRAN compliance built-in
 ✅ Smart testing & review
 
-Try it: https://github.com/username/claude-r-dev
+Try it: https://github.com/Data-Wise/claude-r-dev
 
 #rstats #claude #ai
 ```

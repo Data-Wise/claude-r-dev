@@ -5,12 +5,15 @@ This guide will help you install and use claude-r-dev in your R package.
 ## Prerequisites
 
 ### Required
+
 - **Claude Code CLI**: `npm install -g @anthropic-ai/claude-code`
 - **R** (≥ 4.0.0)
 - **Git**
 
 ### R Packages
+
 These will be installed on first use if needed:
+
 ```r
 install.packages(c(
   "devtools", "testthat", "roxygen2",
@@ -20,6 +23,7 @@ install.packages(c(
 ```
 
 For statistical-methods profile, also install:
+
 ```r
 install.packages("S7")
 ```
@@ -65,30 +69,37 @@ cd claude-r-dev
 ## First Session
 
 ### 1. Navigate to Your Package
+
 ```bash
 cd /path/to/your/package
 ```
 
 ### 2. Start Claude Code
+
 ```bash
 claude
 ```
 
 ### 3. Verify Installation
-```
+
+```text
 /permissions
 ```
+
 You should see a list of allowed tools including R commands, git operations, etc.
 
-```
+```text
 /project:
 ```
+
 You should see available custom commands (fix-bug, pre-commit-check, etc.)
 
 ### 4. Try a Command
-```
+
+```text
 /project:pre-commit-check
 ```
+
 This runs a comprehensive quality check on your package.
 
 ## Common Usage Patterns
@@ -101,7 +112,7 @@ cd ~/mypackage
 claude
 ```
 
-```
+```text
 # Check package status
 "Show git status and recent changes"
 
@@ -120,7 +131,7 @@ claude
 
 ### Adding New Functionality
 
-```
+```text
 # 1. Plan first
 "Read the existing code structure and create a plan for adding calculate_variance()"
 
@@ -139,10 +150,12 @@ claude
 
 ### Fixing Bugs
 
-```
+```text
 /project:fix-bug "calculate_mean fails when all values are NA"
 ```
+
 Follow the guided workflow:
+
 1. Investigation
 2. Diagnosis
 3. Write failing test
@@ -152,10 +165,12 @@ Follow the guided workflow:
 
 ### Code Review
 
-```
+```text
 "Use r-package-reviewer sub-agent to review R/my-function.R"
 ```
+
 Get comprehensive feedback on:
+
 - CRAN compliance
 - Code quality
 - Testing coverage
@@ -163,10 +178,12 @@ Get comprehensive feedback on:
 
 ### Writing Tests
 
-```
+```text
 "Use test-specialist sub-agent to add edge case tests for my_function()"
 ```
+
 Generates tests for:
+
 - Happy path
 - NA values
 - Zero-length inputs
@@ -176,14 +193,18 @@ Generates tests for:
 ## Understanding Profiles
 
 ### Base Profile
+
 **Everyone gets this.** Includes:
+
 - R package development standards
 - Git workflows
 - Essential commands: `/project:fix-bug`, `/project:pre-commit-check`
 - Sub-agents: `r-package-reviewer`, `test-specialist`
 
 ### Statistical-Methods Profile
+
 **For methodology packages.** Adds:
+
 - Causal inference standards
 - Statistical notation (VanderWeele, Pearl, etc.)
 - Commands for adding methods and sensitivity analysis
@@ -192,7 +213,8 @@ Generates tests for:
 ## Key Commands Reference
 
 ### Slash Commands
-```
+
+```text
 /permissions                  # View/modify tool allowlist
 /project:                     # List available custom commands
 /project:fix-bug <desc>       # Guided debugging workflow
@@ -201,12 +223,14 @@ Generates tests for:
 ```
 
 ### Sub-Agents
-```
+
+```text
 "Use r-package-reviewer sub-agent to review [file/changes]"
 "Use test-specialist sub-agent to write tests for [function]"
 ```
 
 ### Keyboard Shortcuts
+
 - `Escape` - Interrupt Claude
 - `Escape` (x2) - Go back in history
 - `Shift+Tab` - Toggle auto-accept mode
@@ -216,15 +240,19 @@ Generates tests for:
 ## Customization
 
 ### Add to CLAUDE.md
+
 Press `#` in Claude Code to add notes that will be remembered:
-```
+
+```text
 # Add your team's specific standards
 # Document project-specific patterns
 # Note common issues and solutions
 ```
 
 ### Create Custom Commands
+
 Add `.md` files to `.claude/commands/`:
+
 ```markdown
 <!-- .claude/commands/my-workflow.md -->
 My custom workflow: $ARGUMENTS
@@ -237,11 +265,13 @@ My custom workflow: $ARGUMENTS
 Use with: `/project:my-workflow some-argument`
 
 ### Modify Tool Permissions
+
 Edit `.claude/settings.json` to adjust allowed tools.
 
 ## Troubleshooting
 
 ### Command Not Found
+
 ```bash
 # Make sure Claude Code is installed
 npm install -g @anthropic-ai/claude-code
@@ -251,17 +281,21 @@ claude --version
 ```
 
 ### Slash Commands Don't Appear
+
 - Restart Claude Code session
 - Check `.claude/commands/` directory exists
 - Verify `.md` files have correct format
 
 ### R CMD check Fails
+
 ```
 /project:pre-commit-check
 ```
+
 This will identify and help fix issues.
 
 ### Tests Failing
+
 ```
 "Use test-specialist to review and fix failing tests in test-my-function.R"
 ```
@@ -269,6 +303,7 @@ This will identify and help fix issues.
 ## Getting Help
 
 ### In Claude Code
+
 ```
 "Explain how to use the r-package-reviewer sub-agent"
 "What does /project:pre-commit-check do?"
@@ -276,11 +311,13 @@ This will identify and help fix issues.
 ```
 
 ### Documentation
+
 - [Profiles Guide](profiles.md) - Detailed profile descriptions
-- [Customization](customization.md) - Extending configurations
+- [Customization](customization-guide.md) - Extending configurations
 - [Contributing](contributing.md) - Adding improvements
 
 ### External Resources
+
 - [Claude Code Docs](https://claude.ai/code)
 - [Best Practices](https://www.anthropic.com/engineering/claude-code-best-practices)
 - [R Packages Book](https://r-pkgs.org/)

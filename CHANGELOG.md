@@ -9,7 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- `/project:init` command - Interactive configuration wizard (Phase 1)
+- Nothing yet
+
+---
+
+## [1.2.0] - 2024-12-06
+
+### Added
+
 - Template system in `profiles/base/templates/`:
   - `CLAUDE.md.template` with variable placeholders
   - `settings.json.template` for tool permissions
@@ -42,12 +49,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Custom CSS templates with badge styling, responsive design, and accessibility features
 - `examples/pkgdown-templates/` directory with reusable configurations
 
+- MkDocs documentation site with Material theme
+- GitHub Pages deployment via MkDocs workflow
+- Contributing guide (`docs_mkdocs/contributing.md`)
+- Tutorials for R package, mediation, causal, and survival analysis
+
 ### Changed
 
+- Migrated documentation from Jekyll HTML to MkDocs Markdown
 - Enhanced base profile with pkgdown design capabilities
 - Updated PROJECT_SUMMARY.md with new repository structure
 
-## [1.0.0] - 2024-12-05
+---
+
+## [1.1.0] - 2024-12-05
 
 ### Added
 
@@ -161,36 +176,6 @@ This is the first public release of claude-r-dev, a modular Claude Code configur
 ---
 
 ## Future Roadmap
-
-### v1.2.0 - Custom Configuration Generator (Planned - January 2025)
-
-**Theme:** Package-specific customization
-
-**Major Features:**
-
-- [ ] `/project:init` command - Interactive setup wizard
-  - Package type selection (statistical-methods, data-analysis, visualization, shiny, etc.)
-  - Domain-specific questions (e.g., "longitudinal models", "survival analysis")
-  - Notation preferences (VanderWeele, Pearl, Rubin, custom)
-  - Object system choice (S3, S4, S7, R6)
-  - Function organization
-  - Inference methods
-  - pkgdown customization
-  - Testing requirements
-- [ ] Configuration file support (`.claude-config.yml`)
-- [ ] Custom CLAUDE.md generation based on user input
-- [ ] Domain-specific command templates
-- [ ] Package-specific pkgdown themes
-- [ ] Save and reuse configurations
-
-**Additional Features:**
-
-- [ ] More pkgdown color schemes (5+ templates)
-- [ ] Enhanced statistical-methods profile
-- [ ] Better error messages and validation
-- [ ] Documentation improvements
-
-**Goal:** Enable users to create mediationverse-style custom configurations for their own packages through guided workflow.
 
 ### v1.3.0 - Intelligent Package Analysis (Planned - Q1 2025)
 

@@ -6,8 +6,8 @@
 [![GitHub release](https://img.shields.io/github/v/release/Data-Wise/claude-r-dev)](https://github.com/Data-Wise/claude-r-dev/releases)
 [![GitHub stars](https://img.shields.io/github/stars/Data-Wise/claude-r-dev)](https://github.com/Data-Wise/claude-r-dev/stargazers)
 [![GitHub Pages](https://img.shields.io/badge/docs-GitHub%20Pages-blue)](https://data-wise.github.io/claude-r-dev/)
-[![Commands](https://img.shields.io/badge/commands-17-green)](https://data-wise.github.io/claude-r-dev/commands-reference.html)
-[![Agents](https://img.shields.io/badge/agents-8-purple)](https://data-wise.github.io/claude-r-dev/commands-reference.html)
+[![Commands](https://img.shields.io/badge/commands-17-green)](https://data-wise.github.io/claude-r-dev/commands-reference/)
+[![Agents](https://img.shields.io/badge/agents-8-purple)](https://data-wise.github.io/claude-r-dev/commands-reference/)
 
 **claude-r-dev** is a comprehensive configuration system for [Claude Code](https://claude.ai/code) that transforms AI-assisted coding from helpful suggestions into systematic, production-ready R package development.
 
@@ -90,7 +90,7 @@ The wizard asks about:
 
 ...and generates a custom configuration tailored to YOUR package!
 
-[Learn more about customization →](docs/customization-guide.md)
+[Learn more about customization →](https://data-wise.github.io/claude-r-dev/customization-guide/)
 
 ## 📦 Available Profiles
 
@@ -140,7 +140,7 @@ For Shiny application packages
 
 For Bioconductor package development
 
-[See all profiles →](docs/profiles.md)
+[See all profiles →](https://data-wise.github.io/claude-r-dev/profiles/)
 
 ## 💡 Usage Examples
 
@@ -236,11 +236,15 @@ For methodology packages:
 
 ## 📚 Documentation
 
-- **[Getting Started](docs/getting-started.md)** - Installation and first steps
-- **[Profiles Guide](docs/profiles.md)** - Available profiles and features
-- **[Customization](docs/customization-guide.md)** - Wizard and manual customization
-- **[Commands Reference](docs/commands-reference.md)** - All commands and agents
-- **[Config Schema](docs/config-schema.md)** - Configuration file reference
+**Documentation Site:** [https://data-wise.github.io/claude-r-dev/](https://data-wise.github.io/claude-r-dev/)
+
+- **[Getting Started](https://data-wise.github.io/claude-r-dev/getting-started/)** - Installation and first steps
+- **[Profiles Guide](https://data-wise.github.io/claude-r-dev/profiles/)** - Available profiles and features
+- **[Customization](https://data-wise.github.io/claude-r-dev/customization-guide/)** - Wizard and manual customization
+- **[Commands Reference](https://data-wise.github.io/claude-r-dev/commands-reference/)** - All commands and agents
+- **[Config Schema](https://data-wise.github.io/claude-r-dev/config-schema/)** - Configuration file reference
+- **[Contributing](https://data-wise.github.io/claude-r-dev/contributing/)** - How to contribute
+- **[Tutorials](https://data-wise.github.io/claude-r-dev/tutorials/)** - Step-by-step guides
 - **[Examples](examples/)** - Example configurations
 - **[Changelog](CHANGELOG.md)** - Version history
 
@@ -364,7 +368,7 @@ A: The configuration is optimized for Claude Code, but many patterns can be adap
 A: Yes! The installer checks for existing configurations and merges intelligently.
 
 **Q: Can I customize the profiles?**  
-A: Absolutely! See [Customization Guide](docs/customization.md) for details.
+A: Absolutely! See [Customization Guide](https://data-wise.github.io/claude-r-dev/customization-guide/) for details.
 
 **Q: How do I update to the latest version?**  
 A: Run `./scripts/update.sh` in your package, or reinstall with the latest version.
