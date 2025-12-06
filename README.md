@@ -3,8 +3,11 @@
 > Supercharge your R package development with AI-powered workflows using Claude Code
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![GitHub release](https://img.shields.io/github/release/Data-Wise/claude-r-dev.svg)](https://github.com/Data-Wise/claude-r-dev/releases)
-[![Documentation](https://img.shields.io/badge/docs-latest-blue.svg)](https://github.com/Data-Wise/claude-r-dev/tree/main/docs)
+[![GitHub release](https://img.shields.io/github/v/release/Data-Wise/claude-r-dev)](https://github.com/Data-Wise/claude-r-dev/releases)
+[![GitHub stars](https://img.shields.io/github/stars/Data-Wise/claude-r-dev)](https://github.com/Data-Wise/claude-r-dev/stargazers)
+[![GitHub Pages](https://img.shields.io/badge/docs-GitHub%20Pages-blue)](https://data-wise.github.io/claude-r-dev/)
+[![Commands](https://img.shields.io/badge/commands-17-green)](https://data-wise.github.io/claude-r-dev/commands-reference.html)
+[![Agents](https://img.shields.io/badge/agents-8-purple)](https://data-wise.github.io/claude-r-dev/commands-reference.html)
 
 **claude-r-dev** is a comprehensive configuration system for [Claude Code](https://claude.ai/code) that transforms AI-assisted coding from helpful suggestions into systematic, production-ready R package development.
 
