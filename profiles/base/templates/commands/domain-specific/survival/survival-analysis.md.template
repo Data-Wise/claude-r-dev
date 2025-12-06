@@ -1,0 +1,149 @@
+# Survival Analysis
+
+Systematic workflow for survival and time-to-event analysis.
+
+## Usage
+
+```
+/survival-analysis
+```
+
+## Workflow
+
+### Phase 1: Data Assessment
+
+1. **Check survival data structure**:
+   - Time variable (continuous, positive)
+   - Event indicator (0/1 or TRUE/FALSE)
+   - Censoring mechanism (right, left, interval)
+   - Tied survival times
+
+2. **Kaplan-Meier exploration**:
+   ```r
+   km_fit <- survival::survfit(Surv(time, event) ~ group, data = df)
+   plot(km_fit)  # Visual assessment
+   ```
+
+3. **Risk set tables**:
+   - Number at risk at key timepoints
+   - Censoring patterns
+   - Follow-up adequacy
+
+**STOP and present survival data summary before proceeding**
+
+### Phase 2: Model Specification
+
+1. **Choose model type**:
+   - Cox proportional hazards (semi-parametric)
+   - Parametric AFT models (Weibull, exponential, log-normal)
+   - Flexible parametric models
+   - Competing risks (Fine-Gray)
+
+2. **Check proportional hazards** (for Cox):
+   ```r
+   # Schoenfeld residuals
+   cox_fit <- coxph(Surv(time, event) ~ x1 + x2, data = df)
+   cox.zph(cox_fit)
+   
+   # Log-log plots
+   plot(km_fit, fun = "cloglog")
+   ```
+
+3. **Handle violations**:
+   - Stratification: `strata(group)`
+   - Time-varying coefficients: `tt(x)` terms
+   - Landmark analysis
+
+### Phase 3: Implementation
+
+```r
+# S7 result class
+SurvivalFit <- S7::new_class(
+  "SurvivalFit",
+  properties = list(
+    coefficients = class_numeric,
+    se = class_numeric,
+    hazard_ratio = class_numeric,
+    ci_lower = class_numeric,
+    ci_upper = class_numeric,
+    n_events = class_integer,
+    concordance = class_numeric
+  ),
+  validator = function(self) {
+    if (any(self@hazard_ratio <= 0)) {
+      return("Hazard ratios must be positive")
+    }
+    if (self@concordance < 0 || self@concordance > 1) {
+      return("Concordance must be between 0 and 1")
+    }
+  }
+)
+```
+
+### Phase 4: Diagnostics
+
+1. **Residual analysis**:
+   - Martingale residuals (functional form)
+   - Deviance residuals (outliers)
+   - Schoenfeld residuals (PH assumption)
+   - dfbeta (influence)
+
+2. **Model checking**:
+   - Concordance statistic (C-index)
+   - Integrated Brier Score
+   - Calibration plots
+
+3. **Prediction accuracy**:
+   - Time-dependent ROC/AUC
+   - Validation (cross-validation or external)
+
+### Phase 5: Reporting
+
+1. **Standard tables**:
+   - Hazard ratios with 95% CI
+   - P-values (Wald, log-rank, score)
+   - Model fit statistics
+
+2. **Required visualizations**:
+   - Kaplan-Meier curves with risk table
+   - Forest plot of hazard ratios
+   - Cox model diagnostic plots
+
+### Phase 6: Testing
+
+```r
+test_that("survfit handles ties correctly", {
+  # Efron vs Breslow vs exact
+})
+
+test_that("handles administrative censoring", {
+  # End of study censoring
+})
+
+test_that("detects PH violations", {
+  # Time-varying effects
+})
+
+test_that("handles single-arm data", {
+  # No comparison group
+})
+```
+
+## Edge Cases
+
+- **Heavy censoring**: >50% censored
+- **No events in a group**: Infinite hazard ratio
+- **Tied times**: Tie-handling methods matter
+- **Very short follow-up**: Unstable estimates
+- **Late entry**: Left truncation
+
+## Quality Checklist
+
+- [ ] Survival data structured correctly
+- [ ] PH assumption checked (for Cox)
+- [ ] Residual diagnostics performed
+- [ ] Censoring patterns assessed
+- [ ] Risk tables included
+- [ ] CI and p-values reported
+- [ ] Visualizations complete
+- [ ] Tests cover edge cases

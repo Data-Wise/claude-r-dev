@@ -1,0 +1,89 @@
+# Proportional Hazards Check
+
+Check and handle proportional hazards assumption violations.
+
+## Usage
+
+```
+/check-proportional-hazards
+```
+
+## Workflow
+
+### Phase 1: Assessment
+
+1. **Fit Cox model**:
+   ```r
+   cox_fit <- coxph(Surv(time, event) ~ x1 + x2, data = df)
+   ```
+
+2. **Schoenfeld test**:
+   ```r
+   ph_test <- cox.zph(cox_fit)
+   print(ph_test)  # p < 0.05 suggests violation
+   ```
+
+3. **Visual assessment**:
+   ```r
+   # Schoenfeld residuals over time
+   plot(ph_test)
+   
+   # Log-log plots
+   km_fit <- survfit(Surv(time, event) ~ group, data = df)
+   plot(km_fit, fun = "cloglog")
+   ```
+
+### Phase 2: Solutions
+
+If PH violated:
+
+1. **Stratification**:
+   ```r
+   # Variable with non-PH becomes stratum
+   coxph(Surv(time, event) ~ x1 + strata(x2), data = df)
+   ```
+
+2. **Time-varying coefficients**:
+   ```r
+   # Coefficient changes over time
+   coxph(Surv(time, event) ~ x1 + tt(x2), 
+         data = df,
+         tt = function(x, t, ...) x * log(t))
+   ```
+
+3. **Piecewise hazards**:
+   ```r
+   # Split follow-up into periods
+   df_split <- survSplit(Surv(time, event) ~ ., 
+                         data = df, 
+                         cut = c(1, 3, 5))
+   ```
+
+4. **Parametric alternatives**:
+   - AFT models (don't assume PH)
+   - Flexible parametric models
+
+### Phase 3: Interpretation
+
+- **Mild violation**: Report with caveat
+- **Moderate violation**: Use stratification or time-varying
+- **Severe violation**: Consider different model class
+
+## Tests
+
+```r
+test_that("detects clear PH violation", {
+  # Simulated non-PH data
+})
+
+test_that("confirms PH when valid", {
+  # Simulated PH data
+})
+```
+
+## Quality Checklist
+
+- [ ] Schoenfeld test performed
+- [ ] Visual plots inspected
+- [ ] Solution implemented if needed
+- [ ] Interpretation updated

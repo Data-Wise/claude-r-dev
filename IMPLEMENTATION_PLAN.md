@@ -418,21 +418,21 @@ metadata:
 - ✅ Example configurations in `examples/configurations/`
 - Config file generator (runtime, no code needed)
 
-### Phase 4: Domain-Specific Templates (Week 4-5)
+### Phase 4: Domain-Specific Templates (Week 4-5) ✅ COMPLETE
 
 **Priority 1 Tasks:**
 
-- [ ] Create statistical methods templates
-- [ ] Create longitudinal models templates
-- [ ] Create survival analysis templates
-- [ ] Create Bayesian inference templates
-- [ ] Test with real packages
+- [x] Create statistical methods templates (done in Phase 2)
+- [x] Create longitudinal models templates (done in Phase 2)
+- [x] Create survival analysis templates
+- [x] Create Bayesian inference templates
+- [ ] Test with real packages (ongoing)
 
 **Deliverables:**
 
-- 4 domain-specific template sets
-- Custom commands for each domain
-- Custom agents for each domain
+- ✅ 4 domain-specific template sets (statistical, longitudinal, survival, bayesian)
+- ✅ 6 domain commands (fit-model, bootstrap-inference, sensitivity-analysis, survival-analysis, check-proportional-hazards, bayesian-model, prior-selection)
+- ✅ 4 domain agents (statistical-methods-expert, longitudinal-expert, survival-expert, bayesian-expert)
 
 ### Phase 5: Testing & Documentation (Week 5-6)
 

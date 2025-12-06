@@ -20,6 +20,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - fit-model, bootstrap-inference, sensitivity-analysis
 - Domain-specific agent templates (Phase 2):
   - statistical-methods-expert, longitudinal-expert
+- Survival analysis templates (Phase 4):
+  - survival-analysis, check-proportional-hazards
+- Bayesian inference templates (Phase 4):
+  - bayesian-model, prior-selection
+- Additional domain agents (Phase 4):
+  - survival-expert, bayesian-expert
 - Configuration file system (Phase 3):
   - `docs/config-schema.md` - Complete schema reference
   - 3 example configurations (mediation, longitudinal, data-pipeline)

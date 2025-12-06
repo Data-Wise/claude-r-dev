@@ -1,0 +1,166 @@
+# Bayesian Model
+
+Systematic workflow for Bayesian model development.
+
+## Usage
+
+```
+/bayesian-model
+```
+
+## Workflow
+
+### Phase 1: Model Specification
+
+1. **Define likelihood**:
+   - Data-generating process
+   - Distributional assumptions
+   - Model structure
+
+2. **Specify priors**:
+   ```r
+   # Example prior specification
+   priors <- list(
+     beta = "normal(0, 10)",     # Weakly informative
+     sigma = "half_cauchy(0, 5)" # Positive scale
+   )
+   ```
+
+3. **Prior predictive check**:
+   - Simulate from priors
+   - Do predictions look reasonable?
+   - Are they within plausible range?
+
+**STOP and confirm prior specification before fitting**
+
+### Phase 2: Implementation
+
+1. **Choose sampler**:
+   - Stan (via `rstan` or `cmdstanr`)
+   - JAGS (via `rjags`)
+   - INLA (for spatial/latent models)
+   - `brms` (high-level interface)
+
+2. **Define model**:
+   ```r
+   # brms example
+   model <- brm(
+     y ~ x1 + x2 + (1 | group),
+     data = df,
+     family = gaussian(),
+     prior = c(
+       prior(normal(0, 10), class = "b"),
+       prior(cauchy(0, 5), class = "sd")
+     ),
+     chains = 4, cores = 4, iter = 2000
+   )
+   ```
+
+3. **S7 result class**:
+   ```r
+   BayesianFit <- S7::new_class(
+     "BayesianFit",
+     properties = list(
+       posterior_samples = class_matrix,
+       summary = class_data.frame,
+       diagnostics = class_list,
+       prior_info = class_character
+     )
+   )
+   ```
+
+### Phase 3: Diagnostics
+
+1. **Convergence**:
+   ```r
+   # R-hat < 1.01
+   rhat(model)
+   
+   # Effective sample size > 400
+   ess_bulk(model)
+   ess_tail(model)
+   ```
+
+2. **Trace plots**:
+   ```r
+   mcmc_trace(model)  # Chains should mix
+   ```
+
+3. **Posterior predictive check**:
+   ```r
+   pp_check(model)  # Does model capture data?
+   ```
+
+4. **Divergences**:
+   ```r
+   # NUTS diagnostics
+   check_divergences(model)
+   check_treedepth(model)
+   ```
+
+### Phase 4: Inference
+
+1. **Summarize posteriors**:
+   - Point estimates (mean, median, mode)
+   - Credible intervals (50%, 90%, 95%)
+   - Probability of direction (pd)
+
+2. **Hypothesis testing**:
+   ```r
+   # Bayes factors
+   hypothesis(model, "x1 > 0")
+   
+   # ROPE testing
+   rope(posterior, range = c(-0.1, 0.1))
+   ```
+
+3. **Model comparison**:
+   ```r
+   # LOO-CV
+   loo(model1)
+   loo_compare(model1, model2)
+   ```
+
+### Phase 5: Reporting
+
+Required elements:
+- Prior specification with justification
+- MCMC diagnostics (R-hat, ESS)
+- Posterior summaries
+- Sensitivity to prior choices
+
+### Phase 6: Testing
+
+```r
+test_that("model converges with default priors", {
+  skip_on_cran()  # Bayesian fits are slow
+  # Expect R-hat < 1.01
+})
+
+test_that("recovers true parameters from simulated data", {
+  skip_on_cran()
+  # Simulation-based calibration
+})
+
+test_that("handles missing data appropriately", {
+  # NA in predictors/outcome
+})
+```
+
+## Edge Cases
+
+- **Slow convergence**: Reparameterize, adjust step size
+- **Divergences**: Centered vs non-centered parameterization
+- **Prior-data conflict**: Check prior sensitivity
+- **Multimodal posterior**: Multiple chains, longer warmup
+
+## Quality Checklist
+
+- [ ] Priors specified and justified
+- [ ] Prior predictive check done
+- [ ] All R-hat < 1.01
+- [ ] ESS adequate (> 400)
+- [ ] No divergences
+- [ ] Posterior predictive check passed
+- [ ] Sensitivity analysis performed
+- [ ] Results reported with uncertainty
