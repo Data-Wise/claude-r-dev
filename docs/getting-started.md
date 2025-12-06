@@ -30,11 +30,11 @@ install.packages("S7")
 
 ```bash
 # For general R packages (base profile)
-curl -fsSL https://raw.githubusercontent.com/username/claude-r-dev/main/scripts/install.sh | \
+curl -fsSL https://raw.githubusercontent.com/Data-Wise/claude-r-dev/main/scripts/install.sh | \
   bash -s -- --profile base --target /path/to/your/package
 
 # For statistical methods packages
-bash <(curl -fsSL https://raw.githubusercontent.com/username/claude-r-dev/main/scripts/install.sh) \
+bash <(curl -fsSL https://raw.githubusercontent.com/Data-Wise/claude-r-dev/main/scripts/install.sh) \
   --profiles base,statistical-methods \
   --target /path/to/your/package
 ```
@@ -43,7 +43,7 @@ bash <(curl -fsSL https://raw.githubusercontent.com/username/claude-r-dev/main/s
 
 ```bash
 # Clone repository
-git clone https://github.com/username/claude-r-dev.git
+git clone https://github.com/Data-Wise/claude-r-dev.git
 cd claude-r-dev
 
 # Install to your package

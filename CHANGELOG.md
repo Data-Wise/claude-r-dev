@@ -10,8 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - `/project:init` command - Interactive configuration wizard (Phase 1)
-- Template system in `profiles/base/templates/`:
-  - `CLAUDE.md.template` with variable placeholders
+- Template system in `profiles/base/templates/`:\n  - `CLAUDE.md.template` with variable placeholders
   - `settings.json.template` for tool permissions
   - `claude-config.yml.template` for saving configurations
 - 5 pkgdown color schemes (Phase 2):
@@ -20,11 +19,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - fit-model, bootstrap-inference, sensitivity-analysis
 - Domain-specific agent templates (Phase 2):
   - statistical-methods-expert, longitudinal-expert
+- Comprehensive documentation:
+  - `docs/profiles.md` - Available profiles guide
+  - `docs/customization-guide.md` - Wizard and manual customization
+  - `docs/commands-reference.md` - All commands and agents
 - `/setup-pkgdown` command for professional website design and standardization
 - pkgdown templates for statistical methods packages
 - Custom CSS templates with badge styling, responsive design, and accessibility features
 - `examples/pkgdown-templates/` directory with reusable configurations
-- Comprehensive template documentation and usage guide
 
 ### Changed
 
