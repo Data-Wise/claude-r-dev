@@ -1,0 +1,103 @@
+site_name: claude-r-dev
+site_description: AI-Powered R Package Development with Claude Code
+site_author: Data-Wise
+site_url: https://data-wise.github.io/claude-r-dev/
+docs_dir: docs_mkdocs
+
+repo_name: Data-Wise/claude-r-dev
+repo_url: https://github.com/Data-Wise/claude-r-dev
+
+theme:
+  name: material
+  palette:
+    # Dark mode (default)
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: purple
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+    # Light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: purple
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+    - content.tabs.link
+  icon:
+    repo: fontawesome/brands/github
+
+plugins:
+  - search
+  - minify:
+      minify_html: true
+
+markdown_extensions:
+  - abbr
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - toc:
+      permalink: true
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
+
+nav:
+  - Home: index.md
+  - Getting Started: getting-started.md
+  - Commands Reference: commands-reference.md
+  - Profiles: profiles.md
+  - Configuration: config-schema.md
+  - Customization: customization-guide.md
+  - Tutorials:
+    - Overview: tutorials/index.md
+    - R Package Development: tutorials/r-package.md
+    - Mediation Analysis: tutorials/mediation.md
+    - Causal Inference: tutorials/causal.md
+    - Survival Analysis: tutorials/survival.md
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/Data-Wise/claude-r-dev
+
+copyright: Copyright &copy; 2024 Data-Wise
