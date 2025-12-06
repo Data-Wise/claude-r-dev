@@ -1,0 +1,95 @@
+# Sensitivity Analysis
+
+Implement sensitivity analysis for unmeasured confounding.
+
+## Usage
+
+```
+/sensitivity-analysis
+```
+
+## Workflow
+
+### Phase 1: Framework Selection
+
+1. **E-value approach** (VanderWeele & Ding, 2017):
+   - Minimum confounding strength to explain away effect
+   - Works for risk ratios, odds ratios, hazard ratios
+
+2. **Tipping point analysis**:
+   - How much confounding to nullify effect?
+   - Visualize range of assumptions
+
+3. **Sensitivity parameter approach**:
+   - Vary ρ (correlation with unmeasured confounder)
+   - Show how estimates change
+
+### Phase 2: Implementation
+
+```r
+# E-value calculation
+compute_evalue <- function(estimate, lo_ci = NULL) {
+  # For risk ratio
+  if (estimate >= 1) {
+    evalue <- estimate + sqrt(estimate * (estimate - 1))
+  } else {
+    evalue <- 1/estimate + sqrt(1/estimate * (1/estimate - 1))
+  }
+  
+  # E-value for CI bound
+  evalue_ci <- NULL
+  if (!is.null(lo_ci)) {
+    if (lo_ci >= 1) {
+      evalue_ci <- lo_ci + sqrt(lo_ci * (lo_ci - 1))
+    } else {
+      evalue_ci <- 1
+    }
+  }
+  
+  list(evalue = evalue, evalue_ci = evalue_ci)
+}
+```
+
+### Phase 3: Visualization
+
+1. **Sensitivity contour plot**:
+   - X-axis: confounder-exposure association
+   - Y-axis: confounder-outcome association
+   - Contours: adjusted estimate
+
+2. **Tipping point visualization**:
+   - Show where estimate crosses null
+   - Compare to plausible confounding
+
+### Phase 4: Interpretation
+
+1. **Report E-value**:
+   > "To explain away the observed effect, an unmeasured confounder 
+   > would need to be associated with both treatment and outcome 
+   > by a risk ratio of at least [E-value], above and beyond the 
+   > measured confounders."
+
+2. **Contextualize**:
+   - Compare to known confounders
+   - Assess biological plausibility
+
+### Phase 5: Documentation
+
+- Explain sensitivity parameter
+- Provide interpretation guidance
+- Include worked example
+- Reference methodology papers
+
+## Key References
+
+- VanderWeele, T. J., & Ding, P. (2017). Sensitivity analysis in observational research. Annals of Internal Medicine.
+- Ding, P., & VanderWeele, T. J. (2016). Sensitivity analysis without assumptions. Epidemiology.
+
+## Quality Checklist
+
+- [ ] Appropriate framework selected
+- [ ] E-values computed correctly
+- [ ] Visualization clear and interpretable
+- [ ] Interpretation guidance provided
+- [ ] References included
+- [ ] Edge cases handled (null effects, etc.)

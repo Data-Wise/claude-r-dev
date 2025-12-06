@@ -1,0 +1,21 @@
+# Academic Blue Color Scheme
+# Professional, scholarly appearance
+
+template:
+  bootstrap: 5
+  bslib:
+    primary: "#1F4788"
+    secondary: "#56B4E9"
+    success: "#009E73"
+    info: "#0072B2"
+    warning: "#E69F00"
+    danger: "#D55E00"
+    light: "#F8F9FA"
+    dark: "#212529"
+
+# CSS Variables
+css_variables:
+  --bs-primary: "#1F4788"
+  --bs-secondary: "#56B4E9"
+  --bs-link-color: "#1F4788"
+  --bs-link-hover-color: "#56B4E9"

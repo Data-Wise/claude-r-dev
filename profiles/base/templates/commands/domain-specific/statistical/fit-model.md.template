@@ -1,0 +1,104 @@
+# Fit Statistical Model
+
+Systematic workflow for fitting and validating statistical models.
+
+## Usage
+
+```
+/fit-model
+```
+
+## Workflow
+
+### Phase 1: Specification
+1. **Define the estimand**:
+   - What causal/statistical quantity are we estimating?
+   - What are the identification assumptions?
+   - What is the target population?
+
+2. **Specify the model**:
+   - Functional form (linear, GLM, mixed effects)
+   - Link function (if applicable)
+   - Random effects structure (if applicable)
+
+3. **Document assumptions**:
+   - List all identification assumptions
+   - Note potential violations
+   - Plan sensitivity analyses
+
+**STOP and confirm model specification before proceeding**
+
+### Phase 2: Implementation
+
+1. **Write the fitting function**:
+   ```r
+   fit_model <- function(data, formula, ...) {
+     # Validate inputs
+     # Fit model
+     # Return S7 result object
+   }
+   ```
+
+2. **Include validators**:
+   - Check data types
+   - Validate formula
+   - Check for missing data
+   - Verify sample size adequacy
+
+3. **Handle edge cases**:
+   - Convergence failures
+   - Singular matrices
+   - Perfect separation (for GLMs)
+
+### Phase 3: Inference
+
+1. **Standard errors**:
+   - Choose method: bootstrap, delta method, sandwich
+   - Implement with proper degrees of freedom
+
+2. **Confidence intervals**:
+   - Percentile, normal, or bias-corrected
+   - Document coverage properties
+
+3. **Hypothesis tests**:
+   - Specify null hypothesis clearly
+   - Use appropriate test statistics
+
+### Phase 4: Diagnostics
+
+1. **Model fit**:
+   - Residual plots
+   - Goodness-of-fit tests
+   - Influence diagnostics
+
+2. **Assumption checks**:
+   - Linearity (if applicable)
+   - Homoscedasticity
+   - Normality of residuals
+
+3. **Sensitivity analysis**:
+   - Vary model specifications
+   - Assess robustness
+
+### Phase 5: Documentation
+
+1. **Function documentation**:
+   - Clear `@param` descriptions
+   - Detailed `@return` structure
+   - Working `@examples`
+
+2. **Vignette section**:
+   - Explain the method
+   - Show interpretation
+   - Discuss limitations
+
+## Quality Checklist
+
+- [ ] Estimand clearly defined
+- [ ] Assumptions documented
+- [ ] Input validation complete
+- [ ] Edge cases handled
+- [ ] Inference implemented
+- [ ] Diagnostics available
+- [ ] Tests written (>80% coverage)
+- [ ] Documentation complete

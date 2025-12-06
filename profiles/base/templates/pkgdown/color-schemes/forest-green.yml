@@ -1,0 +1,21 @@
+# Forest Green Color Scheme
+# Natural, calm appearance
+
+template:
+  bootstrap: 5
+  bslib:
+    primary: "#2C5F2D"
+    secondary: "#97BC62"
+    success: "#5C8A4D"
+    info: "#6B8E23"
+    warning: "#DAA520"
+    danger: "#B22222"
+    light: "#F5F5DC"
+    dark: "#1B4D1B"
+
+# CSS Variables
+css_variables:
+  --bs-primary: "#2C5F2D"
+  --bs-secondary: "#97BC62"
+  --bs-link-color: "#2C5F2D"
+  --bs-link-hover-color: "#97BC62"

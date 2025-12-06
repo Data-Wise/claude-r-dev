@@ -1,0 +1,21 @@
+# Ocean Teal Color Scheme
+# Fresh, technical appearance
+
+template:
+  bootstrap: 5
+  bslib:
+    primary: "#008080"
+    secondary: "#20B2AA"
+    success: "#2E8B57"
+    info: "#5F9EA0"
+    warning: "#FFD700"
+    danger: "#CD5C5C"
+    light: "#E0FFFF"
+    dark: "#004D4D"
+
+# CSS Variables
+css_variables:
+  --bs-primary: "#008080"
+  --bs-secondary: "#20B2AA"
+  --bs-link-color: "#008080"
+  --bs-link-hover-color: "#20B2AA"
