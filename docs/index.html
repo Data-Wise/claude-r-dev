@@ -1,47 +1,215 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>claude-r-dev | AI-Powered R Package Development</title>
     <style>
         :root {
-            --primary: #4f46e5;
-            --primary-dark: #4338ca;
+            /* Dark theme (default) */
             --bg: #0f172a;
             --surface: #1e293b;
+            --surface-hover: #334155;
             --text: #f1f5f9;
             --muted: #94a3b8;
+            --primary: #818cf8;
+            --primary-dark: #6366f1;
+            --accent: #c084fc;
+            --border: #334155;
         }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        [data-theme="light"] {
+            --bg: #f8fafc;
+            --surface: #ffffff;
+            --surface-hover: #f1f5f9;
+            --text: #0f172a;
+            --muted: #64748b;
+            --primary: #4f46e5;
+            --primary-dark: #4338ca;
+            --accent: #7c3aed;
+            --border: #e2e8f0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
             background: var(--bg);
             color: var(--text);
             min-height: 100vh;
             line-height: 1.6;
+            transition: background 0.3s, color 0.3s;
         }
-        .container { max-width: 1000px; margin: 0 auto; padding: 2rem; }
+
+        /* Navigation */
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: var(--surface);
+            border-bottom: 1px solid var(--border);
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0.75rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-brand {
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            padding: 0.5rem 1rem;
+            color: var(--muted);
+            text-decoration: none;
+            border-radius: 6px;
+            transition: all 0.2s;
+            font-size: 0.9rem;
+        }
+
+        .nav-link:hover {
+            color: var(--text);
+            background: var(--surface-hover);
+        }
+
+        .nav-link.active {
+            color: var(--primary);
+        }
+
+        .theme-toggle {
+            background: var(--surface-hover);
+            border: 1px solid var(--border);
+            color: var(--text);
+            padding: 0.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            transition: all 0.2s;
+        }
+
+        .theme-toggle:hover {
+            border-color: var(--primary);
+        }
+
+        .theme-toggle svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        [data-theme="dark"] .sun-icon {
+            display: block;
+        }
+
+        [data-theme="dark"] .moon-icon {
+            display: none;
+        }
+
+        [data-theme="light"] .sun-icon {
+            display: none;
+        }
+
+        [data-theme="light"] .moon-icon {
+            display: block;
+        }
+
+        /* Mobile menu */
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text);
+            padding: 0.5rem;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .mobile-toggle {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--surface);
+                flex-direction: column;
+                padding: 1rem;
+                border-bottom: 1px solid var(--border);
+            }
+
+            .nav-links.open {
+                display: flex;
+            }
+
+            .nav-link {
+                width: 100%;
+                text-align: center;
+            }
+        }
+
+        /* Header */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
         header {
             text-align: center;
             padding: 4rem 0;
             background: linear-gradient(135deg, var(--surface) 0%, var(--bg) 100%);
-            border-bottom: 1px solid #334155;
+            border-bottom: 1px solid var(--border);
         }
+
         h1 {
             font-size: 3rem;
             margin-bottom: 1rem;
-            background: linear-gradient(90deg, #818cf8, #c084fc);
+            background: linear-gradient(90deg, var(--primary), var(--accent));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
+
         .tagline {
             font-size: 1.25rem;
             color: var(--muted);
             max-width: 600px;
             margin: 0 auto 2rem;
         }
-        .buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+        .buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
         .btn {
             display: inline-block;
             padding: 0.75rem 1.5rem;
@@ -50,91 +218,184 @@
             font-weight: 600;
             transition: all 0.2s;
         }
+
         .btn-primary {
             background: var(--primary);
             color: white;
         }
-        .btn-primary:hover { background: var(--primary-dark); }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
         .btn-secondary {
-            border: 2px solid #475569;
+            border: 2px solid var(--border);
             color: var(--text);
         }
-        .btn-secondary:hover { border-color: var(--primary); }
-        main { padding: 3rem 0; }
+
+        .btn-secondary:hover {
+            border-color: var(--primary);
+        }
+
+        /* Main content */
+        main {
+            padding: 3rem 0;
+        }
+
+        section {
+            margin: 3rem 0;
+        }
+
+        section h2 {
+            font-size: 1.75rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
         .features {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 1.5rem;
-            margin: 2rem 0;
+            margin: 1.5rem 0;
         }
+
         .feature {
             background: var(--surface);
             padding: 1.5rem;
             border-radius: 12px;
-            border: 1px solid #334155;
+            border: 1px solid var(--border);
+            transition: all 0.2s;
         }
+
+        .feature:hover {
+            border-color: var(--primary);
+            transform: translateY(-4px);
+        }
+
         .feature h3 {
-            color: #818cf8;
+            color: var(--primary);
             margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
-        .feature p { color: var(--muted); font-size: 0.95rem; }
-        section { margin: 3rem 0; }
-        section h2 {
-            font-size: 1.75rem;
-            margin-bottom: 1rem;
-            border-bottom: 2px solid #334155;
-            padding-bottom: 0.5rem;
+
+        .feature p {
+            color: var(--muted);
+            font-size: 0.95rem;
         }
+
+        /* Docs grid */
         .doc-links {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 1rem;
         }
+
         .doc-link {
             display: block;
-            padding: 1rem;
+            padding: 1.25rem;
             background: var(--surface);
             border-radius: 8px;
             text-decoration: none;
             color: var(--text);
-            border: 1px solid #334155;
+            border: 1px solid var(--border);
             transition: all 0.2s;
         }
+
         .doc-link:hover {
             border-color: var(--primary);
             transform: translateY(-2px);
         }
-        .doc-link small { color: var(--muted); display: block; margin-top: 0.25rem; }
+
+        .doc-link strong {
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+
+        .doc-link small {
+            color: var(--muted);
+        }
+
+        /* Code */
         code {
             background: var(--surface);
             padding: 0.2rem 0.5rem;
             border-radius: 4px;
             font-family: 'SF Mono', Consolas, monospace;
+            font-size: 0.9em;
         }
+
         pre {
             background: var(--surface);
-            padding: 1rem;
+            padding: 1.25rem;
             border-radius: 8px;
             overflow-x: auto;
-            border: 1px solid #334155;
+            border: 1px solid var(--border);
         }
+
+        pre code {
+            background: none;
+            padding: 0;
+        }
+
+        /* Footer */
         footer {
             text-align: center;
             padding: 2rem;
-            border-top: 1px solid #334155;
+            border-top: 1px solid var(--border);
             color: var(--muted);
         }
-        footer a { color: #818cf8; }
+
+        footer a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
+
 <body>
+    <nav>
+        <div class="nav-container">
+            <a href="./" class="nav-brand">claude-r-dev</a>
+            <button class="mobile-toggle" onclick="toggleMenu()" aria-label="Toggle menu">
+                <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
+            <div class="nav-links" id="navLinks">
+                <a href="./" class="nav-link active">Home</a>
+                <a href="getting-started.html" class="nav-link">Getting Started</a>
+                <a href="commands-reference.html" class="nav-link">Commands</a>
+                <a href="profiles.html" class="nav-link">Profiles</a>
+                <a href="https://github.com/Data-Wise/claude-r-dev" class="nav-link">GitHub</a>
+                <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+                    <svg class="sun-icon" fill="currentColor" viewBox="0 0 20 20">
+                        <path
+                            d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" />
+                    </svg>
+                    <svg class="moon-icon" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
     <header>
         <div class="container">
             <h1>claude-r-dev</h1>
             <p class="tagline">Supercharge your R package development with AI-powered workflows using Claude Code</p>
             <div class="buttons">
-                <a href="https://github.com/Data-Wise/claude-r-dev" class="btn btn-primary">View on GitHub</a>
-                <a href="getting-started.html" class="btn btn-secondary">Get Started</a>
+                <a href="https://github.com/Data-Wise/claude-r-dev" class="btn btn-primary">⭐ Star on GitHub</a>
+                <a href="getting-started.html" class="btn btn-secondary">Get Started →</a>
             </div>
         </div>
     </header>
@@ -145,7 +406,8 @@
             <div class="features">
                 <div class="feature">
                     <h3>🔧 Configuration Wizard</h3>
-                    <p>Interactive <code>/project:init</code> command generates custom configurations for your package type.</p>
+                    <p>Interactive <code>/project:init</code> command generates custom configurations for your package
+                        type.</p>
                 </div>
                 <div class="feature">
                     <h3>📊 17 Domain Commands</h3>
@@ -153,7 +415,7 @@
                 </div>
                 <div class="feature">
                     <h3>🤖 8 Expert Agents</h3>
-                    <p>Specialized AI assistants for code review, testing, and domain-specific methodology.</p>
+                    <p>Specialized AI assistants for code review, testing, and domain methodology.</p>
                 </div>
                 <div class="feature">
                     <h3>⚡ Quality Automation</h3>
@@ -187,23 +449,23 @@ claude
             <h2>📚 Documentation</h2>
             <div class="doc-links">
                 <a href="getting-started.html" class="doc-link">
-                    Getting Started
+                    <strong>📖 Getting Started</strong>
                     <small>Installation and first steps</small>
                 </a>
                 <a href="profiles.html" class="doc-link">
-                    Profiles Guide
+                    <strong>📦 Profiles Guide</strong>
                     <small>Available configurations</small>
                 </a>
                 <a href="customization-guide.html" class="doc-link">
-                    Customization
+                    <strong>🎨 Customization</strong>
                     <small>Wizard and manual setup</small>
                 </a>
                 <a href="commands-reference.html" class="doc-link">
-                    Commands Reference
+                    <strong>⚡ Commands Reference</strong>
                     <small>All commands and agents</small>
                 </a>
                 <a href="config-schema.html" class="doc-link">
-                    Config Schema
+                    <strong>📋 Config Schema</strong>
                     <small>Configuration file format</small>
                 </a>
             </div>
@@ -213,23 +475,23 @@ claude
             <h2>🎯 Domain Coverage</h2>
             <div class="features">
                 <div class="feature">
-                    <h3>Statistical Methods</h3>
+                    <h3>📈 Statistical Methods</h3>
                     <p>fit-model, bootstrap-inference, sensitivity-analysis</p>
                 </div>
                 <div class="feature">
-                    <h3>Survival Analysis</h3>
+                    <h3>⏱️ Survival Analysis</h3>
                     <p>survival-analysis, check-proportional-hazards</p>
                 </div>
                 <div class="feature">
-                    <h3>Bayesian Inference</h3>
+                    <h3>🎲 Bayesian Inference</h3>
                     <p>bayesian-model, prior-selection</p>
                 </div>
                 <div class="feature">
-                    <h3>Causal Inference</h3>
+                    <h3>🔗 Causal Inference</h3>
                     <p>validate-dag, propensity-score, doubly-robust, instrumental-variable</p>
                 </div>
                 <div class="feature">
-                    <h3>Mediation Analysis</h3>
+                    <h3>➡️ Mediation Analysis</h3>
                     <p>identify-mediation-effects, multiple-mediators</p>
                 </div>
             </div>
@@ -237,7 +499,33 @@ claude
     </main>
 
     <footer>
-        <p>© 2024 <a href="https://github.com/Data-Wise">Data-Wise</a> | MIT License | <a href="https://github.com/Data-Wise/claude-r-dev">GitHub</a></p>
+        <p>© 2024 <a href="https://github.com/Data-Wise">Data-Wise</a> · MIT License · <a
+                href="https://github.com/Data-Wise/claude-r-dev">GitHub</a></p>
     </footer>
+
+    <script>
+        // Theme toggle
+        function toggleTheme() {
+            const html = document.documentElement;
+            const current = html.getAttribute('data-theme');
+            const next = current === 'dark' ? 'light' : 'dark';
+            html.setAttribute('data-theme', next);
+            localStorage.setItem('theme', next);
+        }
+
+        // Load saved theme
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        } else if (window.matchMedia('(prefers-color-scheme: light)').matches) {
+            document.documentElement.setAttribute('data-theme', 'light');
+        }
+
+        // Mobile menu toggle
+        function toggleMenu() {
+            document.getElementById('navLinks').classList.toggle('open');
+        }
+    </script>
 </body>
+
 </html>
