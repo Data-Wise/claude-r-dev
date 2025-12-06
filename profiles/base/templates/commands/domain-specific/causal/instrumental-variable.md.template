@@ -1,0 +1,132 @@
+# Instrumental Variable Estimation
+
+Implement IV estimation for causal inference.
+
+## Usage
+
+```
+/instrumental-variable
+```
+
+## Workflow
+
+### Phase 1: IV Requirements
+
+**A valid instrument Z must satisfy:**
+
+1. **Relevance**: Z → A (Z affects treatment)
+   - Testable: F-statistic > 10 (rule of thumb)
+
+2. **Exclusion**: Z ⊥ Y | A, U (Z only affects Y through A)
+   - Not testable, requires theory
+
+3. **Independence**: Z ⊥ U (Z unconfounded)
+   - Not testable, requires theory
+
+```
+DAG: Z → A → Y
+     U → A
+     U → Y
+```
+
+### Phase 2: Check Relevance
+
+```r
+# First stage regression
+first_stage <- lm(A ~ Z + C, data = df)
+summary(first_stage)
+
+# F-statistic for excluded instruments
+# Rule: F > 10 to avoid weak IV bias
+anova(first_stage)["Z", "F value"]
+
+# Alternative: Cragg-Donald test
+library(ivpack)
+```
+
+### Phase 3: Implementation
+
+**Two-Stage Least Squares (2SLS):**
+```r
+# Manual 2SLS
+# Stage 1: Predict treatment
+stage1 <- lm(A ~ Z + C, data = df)
+A_hat <- fitted(stage1)
+
+# Stage 2: Outcome on predicted treatment
+stage2 <- lm(Y ~ A_hat + C, data = df)
+# Note: SEs from stage2 are WRONG
+
+# Using ivreg (correct SEs)
+library(ivreg)
+iv_fit <- ivreg(Y ~ A + C | Z + C, data = df)
+summary(iv_fit)
+```
+
+**Just-identified case (single IV):**
+```r
+# Wald estimator
+wald_iv <- cov(Y, Z) / cov(A, Z)
+
+# Equivalent to 2SLS with single IV
+```
+
+### Phase 4: Diagnostics
+
+1. **Weak instrument test**:
+   ```r
+   summary(iv_fit, diagnostics = TRUE)
+   # F > 10 (Stock-Yogo critical values)
+   ```
+
+2. **Wu-Hausman test**:
+   ```r
+   # Is IV needed? (tests exogeneity of A)
+   summary(iv_fit, diagnostics = TRUE)$diagnostics["Wu-Hausman", ]
+   ```
+
+3. **Sargan/Hansen J-test** (if overidentified):
+   ```r
+   # Tests if multiple IVs are valid
+   summary(iv_fit, diagnostics = TRUE)$diagnostics["Sargan", ]
+   ```
+
+### Phase 5: Interpretation
+
+- **LATE**: IV estimates Local Average Treatment Effect
+  - Effect for **compliers** only
+  - Not ATE (unless homogeneous effects)
+
+- **Monotonicity assumption**: No "defiers"
+  - Z=1 can only increase (or not change) treatment probability
+
+```r
+#' @return The instrumental variable estimate represents the 
+#'   Local Average Treatment Effect (LATE) - the causal effect
+#'   among compliers (those whose treatment was affected by the instrument).
+```
+
+### Phase 6: Testing
+
+```r
+test_that("2SLS matches ivreg", {
+  # Manual implementation agrees
+})
+
+test_that("detects weak instruments", {
+  # Warning or error for F < 10
+})
+
+test_that("handles overidentification", {
+  # Multiple IVs
+})
+```
+
+## Quality Checklist
+
+- [ ] IV relevance tested (F > 10)
+- [ ] Exclusion restriction justified (theory)
+- [ ] Independence argued (no confounding of Z)
+- [ ] Correct SEs used (not naive 2SLS)
+- [ ] LATE interpretation stated
+- [ ] Overidentification tested if applicable

@@ -1,0 +1,112 @@
+# Identify Mediation Effects
+
+Check identification assumptions for causal mediation analysis.
+
+## Usage
+
+```
+/identify-mediation-effects
+```
+
+## Workflow
+
+### Phase 1: Define Estimands
+
+1. **Specify effects of interest**:
+   - Natural Direct Effect (NDE)
+   - Natural Indirect Effect (NIE)
+   - Controlled Direct Effect (CDE)
+   - Total Effect (TE)
+
+2. **Define variables**:
+   - A = Exposure/Treatment
+   - M = Mediator(s)
+   - Y = Outcome
+   - C = Confounders
+
+3. **State notation**:
+   ```
+   NDE = E[Y(1,M(0)) - Y(0,M(0))]
+   NIE = E[Y(1,M(1)) - Y(1,M(0))]
+   TE = NDE + NIE
+   ```
+
+### Phase 2: Check Identification Assumptions
+
+**VanderWeele (2015) Conditions:**
+
+1. **No unmeasured A-Y confounding given C**:
+   - Y(a,m) ⊥ A | C
+   - ✅ List measured confounders
+   - ⚠️ Consider potential unmeasured
+
+2. **No unmeasured M-Y confounding given A,C**:
+   - Y(a,m) ⊥ M | A, C
+   - ✅ Check for post-exposure confounders
+   - ⚠️ Intermediate confounding?
+
+3. **No unmeasured A-M confounding given C**:
+   - M(a) ⊥ A | C
+   - ✅ Same confounders as A-Y?
+
+4. **No effect of A on M-Y confounders**:
+   - No L where A → L → M and A → L → Y
+   - ⚠️ Most problematic assumption
+
+**STOP and document assumption assessment before proceeding**
+
+### Phase 3: Draw DAG
+
+```
+# Minimal mediation DAG
+C → A → M → Y
+C → M
+C → Y
+A → Y  (direct effect)
+
+# Check for:
+# - Unblocked backdoor paths
+# - Collider bias
+# - Exposure-induced confounding
+```
+
+### Phase 4: Sensitivity Analysis Plan
+
+1. **For A-Y confounding**:
+   - E-value calculation
+   - Sensitivity parameters (ρ, γ)
+
+2. **For M-Y confounding**:
+   - VanderWeele sensitivity analysis
+   - Correlation-based bounds
+
+3. **Implementation**:
+   ```r
+   # E-value for point estimate
+   evalue <- evalue(RR = exp(coef), lo = exp(ci_lo))
+   ```
+
+### Phase 5: Documentation
+
+Document in function/vignette:
+
+```r
+#' @section Identification Assumptions:
+#' This function estimates the NDE and NIE under:
+#' 1. No unmeasured exposure-outcome confounding given C
+#' 2. No unmeasured mediator-outcome confounding given A, C
+#' 3. No unmeasured exposure-mediator confounding given C
+#' 4. No exposure-induced mediator-outcome confounders
+#'
+#' @section Sensitivity Analysis:
+#' Use [sensitivity_function()] to assess robustness.
+```
+
+## Quality Checklist
+
+- [ ] All four identification assumptions stated
+- [ ] DAG drawn and analyzed
+- [ ] Potential violations identified
+- [ ] Sensitivity analysis planned
+- [ ] Documentation complete
+- [ ] User warnings for assumption violations

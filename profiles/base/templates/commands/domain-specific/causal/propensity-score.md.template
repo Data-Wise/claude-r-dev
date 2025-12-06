@@ -1,0 +1,127 @@
+# Propensity Score Methods
+
+Implement propensity score-based causal inference.
+
+## Usage
+
+```
+/propensity-score
+```
+
+## Workflow
+
+### Phase 1: Propensity Score Estimation
+
+1. **Model specification**:
+   ```r
+   ps_model <- glm(A ~ C1 + C2 + C3, 
+                   data = df, 
+                   family = binomial)
+   ps <- predict(ps_model, type = "response")
+   ```
+
+2. **Check balance before**:
+   ```r
+   cobalt::bal.tab(A ~ C1 + C2 + C3, data = df)
+   ```
+
+3. **Assess common support**:
+   ```r
+   # Check for positivity violations
+   summary(ps)  # Should be away from 0 and 1
+   hist(ps[A==1], col = "blue")
+   hist(ps[A==0], col = "red", add = TRUE)
+   ```
+
+### Phase 2: Choose Method
+
+| Method | When to Use | Pros | Cons |
+|--------|-------------|------|------|
+| **IPW** | Large sample, good overlap | Uses all data | Sensitive to extreme weights |
+| **Matching** | Limited overlap | Intuitive | Loses data |
+| **Stratification** | Exploratory | Simple | Coarse adjustment |
+| **AIPW** | Robustness needed | Doubly-robust | More complex |
+
+### Phase 3: Implementation
+
+**Inverse Probability Weighting:**
+```r
+# Compute weights
+w <- ifelse(A == 1, 1/ps, 1/(1-ps))
+
+# Stabilized weights (recommended)
+w_stab <- ifelse(A == 1, mean(A)/ps, (1-mean(A))/(1-ps))
+
+# Check weight distribution
+summary(w_stab)  # Watch for extreme values
+
+# Weighted outcome model
+ate_ipw <- weighted.mean(Y[A==1], w[A==1]) - 
+           weighted.mean(Y[A==0], w[A==0])
+```
+
+**Matching:**
+```r
+# Nearest neighbor matching
+match_out <- MatchIt::matchit(A ~ C1 + C2 + C3, 
+                               data = df,
+                               method = "nearest",
+                               caliper = 0.2)
+matched_data <- MatchIt::match.data(match_out)
+```
+
+**AIPW (Doubly-Robust):**
+```r
+# Outcome model
+out_model <- lm(Y ~ A + C1 + C2 + C3, data = df)
+
+# AIPW estimator
+mu1 <- predict(out_model, newdata = transform(df, A = 1))
+mu0 <- predict(out_model, newdata = transform(df, A = 0))
+
+aipw <- mean(A * (Y - mu1) / ps + mu1) - 
+        mean((1-A) * (Y - mu0) / (1-ps) + mu0)
+```
+
+### Phase 4: Diagnostics
+
+1. **Balance after adjustment**:
+   ```r
+   cobalt::bal.tab(match_out)  # Std diff < 0.1
+   cobalt::love.plot(match_out)
+   ```
+
+2. **Weight diagnostics**:
+   ```r
+   # Extreme weights?
+   max(w_stab)  # Should be < 10-20
+   
+   # Effective sample size
+   n_eff <- sum(w)^2 / sum(w^2)
+   ```
+
+3. **Sensitivity to PS model**:
+   - Try different specifications
+   - Use machine learning (GBM, random forest)
+
+### Phase 5: Variance Estimation
+
+```r
+# Bootstrap for IPW
+boot_ate <- boot::boot(df, function(d, i) {
+  d_boot <- d[i, ]
+  ps_boot <- glm(A ~ C1 + C2, data = d_boot, family = binomial)$fitted
+  # ... compute ATE
+}, R = 1000)
+
+boot::boot.ci(boot_ate, type = "perc")
+```
+
+## Quality Checklist
+
+- [ ] PS model includes confounders
+- [ ] Positivity checked (no extreme PS)
+- [ ] Balance achieved after adjustment
+- [ ] Extreme weights handled
+- [ ] Variance properly estimated
+- [ ] Sensitivity to PS model specification

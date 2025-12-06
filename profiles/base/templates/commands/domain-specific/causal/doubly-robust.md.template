@@ -1,0 +1,143 @@
+# Doubly-Robust Estimation
+
+Implement AIPW and TMLE doubly-robust estimators.
+
+## Usage
+
+```
+/doubly-robust
+```
+
+## Workflow
+
+### Phase 1: Understanding Doubly-Robust
+
+**Key property**: Consistent if EITHER:
+- Propensity score model correct, OR
+- Outcome model correct
+
+```
+AIPW = E[μ₁(C) - μ₀(C)] + 
+       E[A(Y - μ₁(C))/π(C)] - 
+       E[(1-A)(Y - μ₀(C))/(1-π(C))]
+```
+
+Where:
+- π(C) = P(A=1|C) (propensity score)
+- μₐ(C) = E[Y|A=a, C] (outcome model)
+
+### Phase 2: AIPW Implementation
+
+```r
+aipw_estimator <- function(Y, A, C, data) {
+  # Propensity score model
+  ps_fit <- glm(A ~ ., data = C, family = binomial)
+  ps <- predict(ps_fit, type = "response")
+  
+  # Outcome models
+  out_fit <- lm(Y ~ A * ., data = cbind(A = A, C))
+  
+  # Predictions under A=1 and A=0
+  mu1 <- predict(out_fit, newdata = cbind(A = 1, C))
+  mu0 <- predict(out_fit, newdata = cbind(A = 0, C))
+  
+  # AIPW estimator
+  aipw1 <- mu1 + A * (Y - mu1) / ps
+  aipw0 <- mu0 + (1 - A) * (Y - mu0) / (1 - ps)
+  
+  ate <- mean(aipw1 - aipw0)
+  
+  # Influence function-based SE
+  IF <- (aipw1 - aipw0) - ate
+  se <- sqrt(var(IF) / length(Y))
+  
+  list(ate = ate, se = se)
+}
+```
+
+### Phase 3: TMLE Implementation
+
+**Targeted Maximum Likelihood Estimation:**
+
+```r
+tmle_estimator <- function(Y, A, C) {
+  # Step 1: Initial outcome model
+  Q_fit <- glm(Y ~ A + ., data = cbind(A = A, C), family = gaussian)
+  Q1 <- predict(Q_fit, newdata = cbind(A = 1, C))
+  Q0 <- predict(Q_fit, newdata = cbind(A = 0, C))
+  
+  # Step 2: Propensity score
+  g_fit <- glm(A ~ ., data = C, family = binomial)
+  g1 <- predict(g_fit, type = "response")
+  
+  # Step 3: Clever covariate
+  H1 <- A / g1
+  H0 <- -(1 - A) / (1 - g1)
+  
+  # Step 4: Update (targeting step)
+  eps_fit <- glm(Y ~ -1 + H1 + H0 + offset(Q_fit$linear.predictors), 
+                 family = gaussian)
+  eps <- coef(eps_fit)
+  
+  # Step 5: Updated predictions
+  Q1_star <- Q1 + eps["H1"] / g1
+  Q0_star <- Q0 - eps["H0"] / (1 - g1)
+  
+  # ATE
+  ate <- mean(Q1_star - Q0_star)
+  
+  # Influence curve SE
+  IC <- (A/g1 - (1-A)/(1-g1)) * (Y - c(Q1, Q0)[A+1]) + 
+        (Q1_star - Q0_star) - ate
+  se <- sqrt(var(IC) / length(Y))
+  
+  list(ate = ate, se = se)
+}
+```
+
+### Phase 4: Using R Packages
+
+```r
+# Using AIPW package
+library(AIPW)
+aipw_obj <- AIPW$new(
+  Y = Y, A = A, W = C,
+  Q.SL.library = c("SL.glm", "SL.ranger"),
+  g.SL.library = c("SL.glm", "SL.ranger")
+)
+aipw_obj$fit()$summary()
+
+# Using tmle package
+library(tmle)
+tmle_fit <- tmle(
+  Y = Y, A = A, W = C,
+  Q.SL.library = c("SL.glm", "SL.glm.interaction"),
+  g.SL.library = "SL.glm"
+)
+tmle_fit$estimates$ATE
+```
+
+### Phase 5: Testing
+
+```r
+test_that("AIPW is doubly-robust", {
+  # Correct PS, wrong outcome → consistent
+  # Wrong PS, correct outcome → consistent
+})
+
+test_that("handles extreme propensity scores", {
+  # Truncation or warnings
+})
+
+test_that("SE from influence function", {
+  # Compare to bootstrap
+})
+```
+
+## Quality Checklist
+
+- [ ] Both outcome and PS models specified
+- [ ] Positivity checked (clip extreme PS)
+- [ ] Influence function SE used
+- [ ] Machine learning considered (SuperLearner)
+- [ ] Sensitivity to model specification checked

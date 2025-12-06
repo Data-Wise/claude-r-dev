@@ -1,0 +1,111 @@
+# Validate DAG
+
+Check causal diagram for identification and analysis.
+
+## Usage
+
+```
+/validate-dag
+```
+
+## Workflow
+
+### Phase 1: DAG Specification
+
+1. **Define nodes**:
+   - Exposure (A)
+   - Outcome (Y)
+   - Confounders (C)
+   - Mediators (M) if applicable
+   - Instruments (Z) if applicable
+
+2. **Specify edges**:
+   ```r
+   # Using dagitty syntax
+   dag <- dagitty::dagitty("
+     dag {
+       C -> A
+       C -> Y
+       A -> M
+       M -> Y
+       A -> Y
+     }
+   ")
+   ```
+
+3. **Visualize**:
+   ```r
+   plot(dag)
+   ggdag::ggdag(dag)
+   ```
+
+### Phase 2: Check Structure
+
+1. **Identify adjustment sets**:
+   ```r
+   dagitty::adjustmentSets(dag, exposure = "A", outcome = "Y")
+   ```
+
+2. **Check for backdoor paths**:
+   - Unblocked paths from A to Y not through causal pathway
+
+3. **Identify colliders**:
+   - Don't condition on colliders
+   - Don't condition on descendants of colliders
+
+4. **Check instrumental variables**:
+   ```r
+   dagitty::instrumentalVariables(dag, exposure = "A", outcome = "Y")
+   ```
+
+### Phase 3: Common Issues
+
+| Issue | DAG Pattern | Solution |
+|-------|-------------|----------|
+| Unmeasured confounding | A ← U → Y | Sensitivity analysis |
+| Collider bias | A → C ← Y, conditioning on C | Remove from adjustment |
+| Overadjustment | Adjusting for mediator | Exclude from set |
+| M-bias | Complex backdoor | Careful adjustment |
+
+### Phase 4: Validation Checks
+
+1. **D-separation**:
+   ```r
+   # Check conditional independencies
+   dagitty::impliedConditionalIndependencies(dag)
+   ```
+
+2. **Test implications**:
+   ```r
+   # Compare to data
+   for (indep in implied_independencies) {
+     test_independence(data, indep)
+   }
+   ```
+
+3. **Sensitivity to structure**:
+   - Add plausible edges
+   - Check if conclusions change
+
+### Phase 5: Documentation
+
+```r
+#' @section Causal Assumptions:
+#' The following DAG is assumed:
+#' \preformatted{
+#'   C -> A -> Y
+#'   C -> Y
+#' }
+#' 
+#' Adjustment for C blocks all backdoor paths from A to Y.
+#' This assumes no unmeasured confounding beyond C.
+```
+
+## Quality Checklist
+
+- [ ] All relevant variables included
+- [ ] Edges reflect causal knowledge
+- [ ] Adjustment sets identified
+- [ ] No collider conditioning
+- [ ] Implied independencies checked
+- [ ] DAG documented in package

@@ -24,8 +24,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - survival-analysis, check-proportional-hazards
 - Bayesian inference templates (Phase 4):
   - bayesian-model, prior-selection
+- Causal inference templates (Phase 4):
+  - validate-dag, propensity-score, doubly-robust, instrumental-variable
+- Mediation analysis templates (Phase 4):
+  - identify-mediation-effects, multiple-mediators
 - Additional domain agents (Phase 4):
-  - survival-expert, bayesian-expert
+  - survival-expert, bayesian-expert, causal-inference-expert, mediation-expert
 - Configuration file system (Phase 3):
   - `docs/config-schema.md` - Complete schema reference
   - 3 example configurations (mediation, longitudinal, data-pipeline)

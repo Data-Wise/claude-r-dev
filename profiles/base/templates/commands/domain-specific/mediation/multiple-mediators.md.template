@@ -1,0 +1,109 @@
+# Multiple Mediators
+
+Handle parallel and serial multiple mediator analysis.
+
+## Usage
+
+```
+/multiple-mediators
+```
+
+## Workflow
+
+### Phase 1: Mediator Structure
+
+1. **Identify structure**:
+   - **Parallel**: M1, M2 operate independently
+   - **Serial**: M1 → M2 (causally ordered)
+   - **Mixed**: Combination
+
+2. **Draw mediator DAG**:
+   ```
+   # Parallel
+   A → M1 → Y
+   A → M2 → Y
+   A → Y
+   
+   # Serial
+   A → M1 → M2 → Y
+   A → M2 → Y
+   A → Y
+   ```
+
+### Phase 2: Effect Decomposition
+
+**Parallel Mediators:**
+```
+TE = NDE + NIE_M1 + NIE_M2
+```
+- Path-specific effects identifiable if M1 ⊥ M2 | A, C
+
+**Serial Mediators:**
+```
+TE = NDE + NIE_M1_only + NIE_M1_via_M2 + NIE_M2_only
+```
+- More complex identification conditions
+
+### Phase 3: Identification Challenges
+
+1. **Parallel mediators**:
+   - Need M1 ⊥ M2 | A, C (strong assumption)
+   - Or accept only joint indirect effect
+
+2. **Serial mediators**:
+   - Order must be known (causal, not temporal)
+   - M1-M2 confounding matters
+
+3. **Recommendations**:
+   ```r
+   # Conservative: Report only what's identifiable
+   total_indirect <- NIE_M1 + NIE_M2  # Joint effect
+   
+   # If M1 ⊥ M2 | A, C holds:
+   path_specific_M1 <- NIE_via_M1
+   path_specific_M2 <- NIE_via_M2
+   ```
+
+### Phase 4: Implementation Approaches
+
+**Approach 1: Interventional Effects** (Vansteelandt & Daniel)
+- Relaxes cross-world assumptions
+- Randomized interventional analogues
+
+**Approach 2: Natural Path-Specific Effects** (VanderWeele & Vansteelandt)
+- Requires stronger assumptions
+- Full decomposition possible
+
+**Approach 3: Joint Mediation**
+- Test if any mediator mediates (conservative)
+- Doesn't require M1 ⊥ M2
+
+```r
+# Joint mediation (always identifiable)
+joint_nie <- estimate_joint_nie(A, c(M1, M2), Y, C)
+```
+
+### Phase 5: Testing
+
+```r
+test_that("parallel mediators decompose correctly", {
+  # TE = NDE + NIE_M1 + NIE_M2
+})
+
+test_that("serial mediators handle ordering", {
+  # Order matters for path-specific
+})
+
+test_that("correlated mediators work", {
+  # Joint effect when M1 ⊥̸ M2
+})
+```
+
+## Quality Checklist
+
+- [ ] Mediator structure identified (parallel/serial)
+- [ ] DAG with all mediators drawn
+- [ ] Identifiability conditions checked
+- [ ] Appropriate decomposition chosen
+- [ ] Assumptions clearly documented
+- [ ] Conservative options available
