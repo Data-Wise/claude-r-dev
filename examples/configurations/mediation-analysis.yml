@@ -1,0 +1,61 @@
+# Mediation Analysis Package Configuration
+# Example for packages like RMediation, medsim, probmed
+
+package:
+  name: "mymediation"
+  type: "statistical-methods"
+  domain: "causal mediation analysis"
+
+notation:
+  style: "vanderweele"
+  custom_terms:
+    - "NDE: Natural Direct Effect"
+    - "NIE: Natural Indirect Effect"
+    - "TE: Total Effect"
+    - "PM: Proportion Mediated"
+
+object_system: "s7"
+
+function_categories:
+  - name: "Effect Estimation"
+    description: "Functions to estimate mediation effects"
+    patterns: ["estimate_*", "mediate_*"]
+  - name: "Inference"
+    description: "Confidence intervals and hypothesis tests"
+    patterns: ["ci_*", "test_*", "boot_*"]
+  - name: "Sensitivity Analysis"
+    description: "Unmeasured confounding assessment"
+    patterns: ["sens_*", "evalue_*"]
+  - name: "Visualization"
+    description: "Plotting methods"
+    patterns: ["plot.*", "plot_*"]
+
+inference:
+  methods: ["bootstrap", "delta_method"]
+  bootstrap:
+    default_samples: 1000
+    parallel: true
+
+testing:
+  coverage_required: 85
+  edge_cases:
+    - "missing_data"
+    - "singular"
+    - "small_n"
+    - "numerical"
+
+pkgdown:
+  enabled: true
+  color_scheme: "academic_blue"
+  badges_sidebar: true
+
+code_style: "tidyverse"
+
+dependencies:
+  critical: ["stats", "boot"]
+  special_handling: "Monte Carlo methods need seed handling"
+
+metadata:
+  created: "2025-12-05T23:00:00Z"
+  generator: "claude-r-dev"
+  version: "1.2.0"

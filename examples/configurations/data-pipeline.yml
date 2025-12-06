@@ -1,0 +1,51 @@
+# Data Pipeline Package Configuration
+# Example for tidyverse-style data analysis packages
+
+package:
+  name: "mydatapipe"
+  type: "data-analysis"
+  domain: "data wrangling and transformation"
+
+notation:
+  style: "standard"
+
+object_system: "s3"
+
+function_categories:
+  - name: "Import"
+    description: "Read and import data"
+    patterns: ["read_*", "import_*", "load_*"]
+  - name: "Transform"
+    description: "Data manipulation and cleaning"
+    patterns: ["clean_*", "transform_*", "mutate_*"]
+  - name: "Summarize"
+    description: "Aggregation and summary statistics"
+    patterns: ["summarize_*", "aggregate_*"]
+  - name: "Export"
+    description: "Write and export data"
+    patterns: ["write_*", "export_*", "save_*"]
+
+inference:
+  methods: []
+
+testing:
+  coverage_required: 80
+  edge_cases:
+    - "missing_data"
+    - "zero_variance"
+
+pkgdown:
+  enabled: true
+  color_scheme: "ocean_teal"
+  badges_sidebar: true
+
+code_style: "tidyverse"
+
+dependencies:
+  critical: ["dplyr", "tidyr", "readr"]
+  special_handling: ""
+
+metadata:
+  created: "2025-12-05T23:00:00Z"
+  generator: "claude-r-dev"
+  version: "1.2.0"

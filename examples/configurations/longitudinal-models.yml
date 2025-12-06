@@ -1,0 +1,62 @@
+# Longitudinal Models Package Configuration
+# Example for packages with mixed effects and repeated measures
+
+package:
+  name: "mylongitudinal"
+  type: "statistical-methods"
+  domain: "longitudinal mixed effects models"
+
+notation:
+  style: "rubin"
+  custom_terms:
+    - "Y(t): Outcome at time t"
+    - "β₀ᵢ: Random intercept"
+    - "β₁ᵢ: Random slope"
+    - "εᵢⱼ: Residual error"
+
+object_system: "s7"
+
+function_categories:
+  - name: "Model Fitting"
+    description: "Fit longitudinal mixed models"
+    patterns: ["fit_*", "lme_*", "glmm_*"]
+  - name: "Random Effects"
+    description: "Random effects extraction and analysis"
+    patterns: ["ranef_*", "blup_*"]
+  - name: "Diagnostics"
+    description: "Model checking and validation"
+    patterns: ["check_*", "diagnose_*", "residual_*"]
+  - name: "Prediction"
+    description: "Prediction and forecasting"
+    patterns: ["predict_*", "forecast_*"]
+
+inference:
+  methods: ["bootstrap", "delta_method"]
+  bootstrap:
+    default_samples: 1000
+    parallel: true
+
+testing:
+  coverage_required: 80
+  edge_cases:
+    - "missing_data"
+    - "unbalanced"
+    - "singular"
+    - "convergence"
+    - "small_n"
+
+pkgdown:
+  enabled: true
+  color_scheme: "forest_green"
+  badges_sidebar: true
+
+code_style: "tidyverse"
+
+dependencies:
+  critical: ["lme4", "nlme", "Matrix"]
+  special_handling: "Convergence failures need multiple optimizer attempts"
+
+metadata:
+  created: "2025-12-05T23:00:00Z"
+  generator: "claude-r-dev"
+  version: "1.2.0"
